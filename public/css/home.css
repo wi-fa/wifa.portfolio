@@ -1,0 +1,228 @@
+@import '/css/shared.css';
+
+/* Description */
+/* 1. Main-section with cards */
+/* 2. Main-mediaquerys */
+
+/* 1. Main-sections with cards */
+
+.all-cards {
+    padding: 2rem;
+    border: 1px solid var(--three);
+    border-radius: 40px;
+    text-align: end;
+    background: linear-gradient(43deg, #030303, #303030);
+    background-size: 400% 400%;
+    animation: backgroundani 5s ease infinite;
+    height: 27rem;
+    transition: 100ms;
+}
+
+@keyframes backgroundani {
+    0% {
+        background-position: 24% 0%;
+    }
+    50% {
+        background-position: 77% 100%;
+    }
+    100% {
+        background-position: 24% 0%;
+    }
+}
+
+#cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        'card-1 card-1 card-2 card-2 card-2'
+        'card-3 card-3 card-3 card-4 card-4';
+    gap: 3rem;
+    width: 100%;
+    height: 100%;
+    transition: ease all 0.5s;
+}
+
+.all-cards p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+}
+
+.all-cards h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+/* First card */
+#card-1 {
+    grid-area: card-1;
+    overflow: hidden;
+}
+
+#memoji-container img {
+    width: 20rem;
+    position: relative;
+    top: 2.5rem;
+    margin-right: 2.5rem;
+}
+
+/* Second card */
+#card-2 {
+    grid-area: card-2;
+    overflow: hidden;
+}
+
+#contact-img-container img {
+    width: 60rem;
+    position: relative;
+    top: -1.5rem;
+}
+
+/* Third card */
+#card-3 {
+    grid-area: card-3;
+    overflow: hidden;
+}
+
+#skills-list-container ul {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    top: 6rem;
+    padding: 0;
+}
+
+#skills-list-container ul li {
+    list-style: none;
+}
+
+#skills-list-container ul li img {
+    width: 11rem;
+}
+
+/* Fourth card */
+#card-4 {
+    grid-area: card-4;
+    overflow: hidden;
+}
+
+#portfolio-img-container img {
+    width: 16rem;
+    position: relative;
+    left: -5rem;
+}
+
+/* Card-hovering effects */
+.all-cards:hover {
+    transform: scale(0.99);
+}
+
+/* 2. Main-mediaquerys */
+
+@media screen and (max-width: 849px) {
+    /* cards */
+    #cards-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            'card-1'
+            'card-2'
+            'card-3'
+            'card-4';
+        -webkit-transiation: all 0.35s ease;
+        -moz-transiation: all 0.35s ease;
+        -o-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+    }
+
+    .all-cards {
+        height: 15rem;
+    }
+
+    .all-cards p {
+        font-size: 0.8rem;
+    }
+
+    /* card-1 */
+    #memoji-container img {
+        top: -1.9rem;
+        width: 13rem;
+    }
+
+    /* card-2 */
+    #contact-img-container img {
+        width: 35rem;
+        left: 5rem;
+    }
+
+    /* card-3 */
+    #skills-list-container ul {
+        margin: 0;
+        padding: 0;
+        top: 3rem;
+    }
+
+    #skills-list-container ul li img {
+        width: 6rem;
+    }
+
+    /* card-4 */
+    #portfolio-img-container img {
+        width: 17rem;
+        top: -1rem;
+        left: 0.5rem;
+    }
+
+    #portfolio-img-container {
+        display: flex;
+        margin-top: -5rem;
+    }
+}
+
+/* Extra mediaquery for card-3 and card-4 to fit the image */
+@media screen and (max-width: 490px) {
+    #portfolio-img-container img {
+        width: 16rem;
+        top: 5rem;
+    }
+
+    #contact-img-container img {
+        left: 2rem;
+    }
+
+    #skills-list-container ul li img {
+        width: 4rem;
+    }
+}
+
+/* Mediaquery for the smaller screens */
+@media screen and (max-width: 400px) {
+    .all-cards {
+        height: 10rem;
+    }
+
+    #memoji-container img {
+        width: 9rem;
+        top: -3rem;
+        left: -7rem;
+    }
+
+    #contact-img-container img {
+        width: 20rem;
+    }
+
+    #skills-list-container ul {
+        margin: 0;
+        padding: 0;
+        top: 0.5rem;
+    }
+
+    #portfolio-img-container img {
+        width: 7rem;
+        top: 1rem;
+        left: -1rem;
+    }
+}
+
+/* All code is checked with W3C'S code validator https://validator.w3.org/ */

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Error page of a portfolio website for William Falk, a front-end developer from sweden"
+        />
+        <title>William Falk's Portfolio</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/shared.css" />
+        <link rel="stylesheet" href="css/overlay.css" />
+
+        <!-- JavaScript -->
+        <script src="scripts/jsonData.js" defer></script>
+        <script src="scripts/preloader.js" defer></script>
+        <script src="scripts/app.js" defer></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+        <!-- Favicon -->
+        <link rel="icon" href="images/Favicon-01.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="favicon.ico" type="image/x-icon" />
+
+        <!-- Hiding everything except backdrop -->
+        <style>
+            body > *:not(#backdrop) {
+                display: none;
+            }
+
+            /* Styling for the get back button */
+            #getBack {
+                font-size: 1.1rem;
+                font-weight: 100;
+                letter-spacing: 2px;
+                color: var(--white);
+                background-color: var(--one);
+                padding: 1rem 1.5rem;
+                border-radius: 20px;
+                border: none;
+                transition: 150ms ease-in;
+            }
+
+            #btn-container {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Backdrop for modal -->
+        <div id="backdrop"></div>
+        <!-- End of backdrop -->
+
+        <header>
+            <!-- Navbar -->
+            <nav id="navbar">
+                <a href="">
+                    <img
+                        id="logo"
+                        typeof="svg"
+                        src="images/Favicon-01.svg"
+                        alt="logo"
+                    />
+                </a>
+                <ul id="nav" class="navigation"></ul>
+                <button class="btn" id="lets-talk-btn">Let's Talk</button>
+            </nav>
+            <!-- End of navbar -->
+
+            <!-- Hero -->
+            <section id="hero-container">
+                <div class="lines">
+                    <div class="head-line-hor"></div>
+                    <div class="head-line-ver"></div>
+                </div>
+                <h1 id="hero-title">
+                    Something broke<span class="brand-color">!</span>
+                </h1>
+                <p id="hero-paragraph">
+                    Error: <%= error.message %>
+                </p>
+            </section>
+            <!-- End of hero -->
+
+            <!-- Modal (Only displayed if klicked navbar-button) -->
+            <aside class="modal" id="config-overlay">
+                <section>
+                    <h3>What's up?</h3>
+                    <p>
+                        If you have a question, hit me up on my email or any of
+                        my other socials!
+                    </p>
+                </section>
+                <section>
+                    <div id="modal-socails">
+                        <ul>
+                            <li>
+                                <a
+                                    href="https://se.linkedin.com/in/william-falk-6a158a271"
+                                    ><img
+                                        src="images/icons/icons8-linkedin(1).svg"
+                                        alt="linkedin-icon"
+                                        type="svg"
+                                /></a>
+                            </li>
+                            <li>
+                                <a href="https://dribble.com/wi-fa/"
+                                    ><img
+                                        src="images/icons/icons8-dribble.svg"
+                                        alt="dribble-icon"
+                                        type="svg"
+                                /></a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/wi-fa/"
+                                    ><img
+                                        src="images/icons/icons8-github(1).svg"
+                                        alt="github-icon"
+                                        type="svg"
+                                /></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="modal-email-phone">
+                        <ul>
+                            <li>
+                                <a href="mailto:wifawebbdesign@gmail.com"
+                                    >Wifawebbdesign@gmail.com</a
+                                >
+                            </li>
+                            <li>
+                                <a href="callto:+46706992289">+46706992289</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="close-modal-container">
+                        <button id="close-modal">Close</button>
+                    </div>
+                </section>
+            </aside>
+            <!-- End of modal -->
+        </header>
+
+        <div id="btn-container">
+            <a href="/home" id="getBack">Home</a>
+        </div>
+
+        <!-- Footer-section -->
+        <footer><%- include('includes/footer') %></footer>
+        <!-- End of footer -->
+
+        <!-- Preloader container -->
+        <div
+            id="preloader"
+            style="
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            "
+        >
+            <img src="images/preloader.gif" alt="preloader" />
+        </div>
+        <!-- End of preloader -->
+    </body>
+</html>
+
+<!-- All code is checked with W3C'S code validator https://validator.w3.org/ -->

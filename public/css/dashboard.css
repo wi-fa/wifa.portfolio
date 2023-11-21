@@ -1,0 +1,778 @@
+/* 1. Root settings */
+
+/* 2. Dashboard Layout */
+/* 3. Portfolio admin page */
+/* 4. Add portfolio item */
+/* 5. Editmodal */
+/* 5. Overlay styles*/
+
+
+/* 1. Root settings */
+
+* {
+    --white: white;
+    --black: #000000;
+    --one: #2bd890;
+    --two: rgb(29, 130, 87);
+    --three: rgb(30, 30, 30);
+    --four: rgb(197, 197, 197);
+    --five: rgb(134, 240, 196);
+}
+
+.brand-color {
+    color: var(--one);
+}
+
+@media screen and (max-width: 840px) {
+    * {
+        -webkit-transiation: all 0.35s ease;
+        -moz-transiation: all 0.35s ease;
+        -o-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+    }
+}
+
+
+
+html,
+body {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 1433px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+    color: var(--white);
+    background-color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Dashboard Layout */
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    border-radius: 40px;
+    background-color: #000000;
+}
+
+
+/* Dashboard navigation */
+.mobile-header {
+    display: none;
+}
+
+.dashboard-sidebar {
+    width: 230px;
+    background-color: #050d0d;
+    color: rgb(194, 194, 194);
+    min-height: 100vh;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2rem;
+
+    transition: left 0.3s;
+}
+
+.dashboard-sidebar.active {
+    left: 0;
+}
+
+.dashboard-sidebar nav {
+    margin: 0 1rem;
+}
+
+.dashboard-sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+    padding-top: 2rem;
+}
+
+svg {
+    width: 13%;
+    padding-right: 1rem;
+    margin-left: 1rem;
+    color: var(--one);
+}
+
+.dashboard-sidebar nav #sidebar-img {
+    width: 30%;
+}
+
+.dashboard-sidebar nav ul li a {
+    color: white;
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+    height: 2rem;
+    border-radius: 20px;
+    transition: 200ms ease-in;
+}
+
+.dashboard-sidebar nav ul li a:hover {
+    background-color: var(--one);
+    box-shadow: 0px 0px 12px var(--one);
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+}
+
+/* Dashboard content */
+
+.dashboard-content {
+    flex: 1;
+    overflow-y: auto;
+    background: linear-gradient(43deg, #000000, #000000);
+    transition: 100ms;
+    border-radius: 20px;
+}
+
+.content-container {
+    border-radius: 20px;
+    margin: 0.5rem;
+    padding: 1rem;
+    margin-right: 1rem;
+}
+
+.content-container h4 {
+    padding: 1rem;
+}
+
+#dashboard-header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--black);
+    align-items: left;
+    justify-content: center;
+    padding: 2rem 1.5rem 0.5rem 1rem;
+}
+
+#dashboard-h4-default {
+    font-size: 1.3rem;
+    margin: 2rem 0 0 1rem;
+}
+
+#dashboard-header h2 {
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+#content-options {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+}
+
+.options {
+    background: linear-gradient(43deg, #050d0d, #050d0d);
+    border-radius: 20px;
+    width: 100%;
+}
+
+#content-options a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+#dash-card-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.admin-cards {
+    box-sizing: border-box;
+    padding: 2rem;
+    border-radius: 20px;
+    background: linear-gradient(43deg, #050d0d, #050d0d);
+    min-height: 200px;
+}
+
+#dash-card-1 {
+    width: 65%;
+}
+
+#dash-card-2 {
+    width: 35%;
+}
+
+#btnSevenDays,
+#btnThirtyDays,
+#btnPercent,
+#btnVisits {
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white);
+    background-color: var(--one);
+    padding: 0.4rem 0.6rem;
+    margin-right: .5rem;
+    border-radius: 6px;
+    border: none;
+    transition: 150ms ease-in;
+    cursor: pointer;
+}
+
+#chart-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+/* Dashboard content mediaquerys */
+
+@media screen and (max-width: 768px) {
+    .dashboard-container {
+        display: block;
+    }
+
+    .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 1.5rem 0 1.5rem;
+    }
+
+    #back-arrow {
+        font-size: 2rem;
+        margin: 0;
+        color: #2bd890;
+        cursor: pointer;
+    }
+
+    #back-arrow:hover {
+        color: #14794f;
+    }
+
+    .dashboard-sidebar {
+        display: none;
+    }
+
+    #dashboard-h4-default {
+        display: none;
+        margin-left: 1rem;
+    }
+
+    #content-options {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    .options {
+        flex: 0 0 calc(50% - 0.5rem);
+        height: auto;
+    }
+
+    #dash-card-container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Adjust gap between the cards if needed */
+    }
+
+    .admin-cards,
+    #dash-card-1,
+    #dash-card-2 {
+        width: 100%; /* This will make the cards take up the full width */
+        height: 60vh;
+    }
+
+    #buttons-for-second-chart {
+        margin-top: -1rem;
+    }
+
+}
+
+
+
+/* 3. Portfolio admin page */
+
+#portfolio-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between; /* Adjust if needed to align the cards */
+    align-items: center;
+}
+
+
+/* Portfolio item libraby */
+
+.portfolio-cards {
+    box-sizing: border-box;
+    padding: 2rem;
+    border-radius: 20px;
+    background: linear-gradient(43deg, #050d0d, #050d0d);
+    transition: transform 0.3s ease;
+    width: calc(
+        50% - 2rem
+    ); /* Adjust this to control the number of columns on larger screens */
+}
+
+.portfolio-cards h2 {
+    font-size: 1.2rem;
+    margin-left: 2.5rem;
+}
+
+.portfolio-cards:hover {
+    transform: translateY(-5px);
+}
+
+.portfolio-cards a {
+    color: white;
+    text-decoration: none;
+    display: block; /* Change to block to avoid stretching the anchor */
+}
+
+.portfolio-cards img {
+    width: 100%; /* Full width of the card */
+    height: auto;
+    display: block;
+}
+
+#portfolio-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+a.btn {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--one);
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border: none;
+    transition: 150ms ease-in;
+}
+
+a.btn:hover {
+    transform: scale(0.95);
+    box-shadow: 0px 0px 12px var(--one);
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+}
+
+a#delete.btn {
+    background-color: red;
+}
+a#delete.btn:hover {
+    transform: scale(0.95);
+    box-shadow: 0px 0px 12px red;
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+}
+
+/* Responsive portfolio layout for smaller screens */
+@media screen and (max-width: 768px) {
+    .portfolio-cards {
+        width: 100%;
+        margin: 0 0 2rem 0;
+    }
+}
+
+/* 4. Add portfolio item */
+
+#add-portfolio-container {
+    width: 95%;
+}
+
+#first-section-form {
+    margin-right: 3rem;
+}
+
+.content-container#add-portfolio {
+    width: auto;
+}
+
+form {
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 2rem;
+    background-color: #050d0d;
+    border-radius: 20px;
+    width: 55rem;
+}
+
+input {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    height: 3rem;
+    color: white;
+    width: 25rem;
+    background-color: rgba(0, 0, 0, 0);
+    padding-left: 0.5rem;
+    margin-bottom: 2rem;
+    border: none;
+    border-bottom: 1px solid #2bd890;
+    outline: none;
+}
+
+/* Fileupload input */
+input[type='file'] {
+    height: auto;
+    width: 25rem;
+    max-width: 100%;
+    color: #ffffff;
+    padding: 8px;
+    background: rgba(52, 52, 52, 0);
+    outline: none;
+    border: none;
+}
+
+input[type='file']::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: var(--one);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+input[type='file']::file-selector-button:hover {
+    box-shadow: 0px 0px 12px var(--one);
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+    transform: scale(0.97);
+}
+
+textarea {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    height: 3.5rem;
+    width: 25rem;
+    background-color: rgba(52, 52, 52, 0);
+    padding-left: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-bottom: 1px solid #2bd890;
+    outline: none;
+}
+
+input:focus,
+input:active,
+textarea:active,
+textarea:focus {
+    color: white;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
+    display: block;
+}
+
+#portfolio-form-buttons {
+    display: flex;
+    flex-direction: column;
+    transition: 150ms ease;
+    width: 59rem;
+}
+
+.portfolio-form-btn#btn-add {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    background: var(--one);
+    padding: 1rem 4rem;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    width: 59rem;
+    margin-bottom: 1rem;
+}
+
+.portfolio-form-btn#btn-add:hover {
+    transform: scale(0.99);
+    box-shadow: 0px 0px 12px var(--one);
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+}
+
+.portfolio-form-btn#btn-cancel {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    background: red;
+    padding: 1rem 4rem;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    width: 59rem;
+}
+
+.portfolio-form-btn#btn-cancel:hover {
+    transform: scale(0.99);
+    box-shadow: 0px 0px 12px red;
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+}
+
+/* Mediaquerys for the add portfolio */
+
+@media screen and (max-width: 768px) {
+    .content-container#add-portfolio {
+        width: 44rem;
+    }
+
+    form {
+        display: block;
+        width: 40rem;
+    }
+
+    label {
+        font-size: 1.5rem;
+    }
+
+    input {
+        font-size: 1rem;
+        width: 39rem;
+    }
+
+    input[type='file']{
+        width: 39rem;
+        font-size: 1rem;
+    }
+
+    input[type='file']::file-selector-button{
+        font-size: 1rem;
+    }
+
+    textarea {
+        columns: 10;
+        height: auto;
+        font-size: 1rem;
+        width: 39rem;
+    }
+
+    #addImgPreview {
+        width: 500px;
+        margin: auto;
+    }
+
+
+    #portfolio-form-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-self: center;
+    }
+
+    .portfolio-form-btn#btn-add {
+        width: 39rem;
+    }
+
+    .portfolio-form-btn#btn-cancel {
+        width: 39rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .content-container#add-portfolio {
+        width: 18rem;
+    }
+
+    form {
+        width: 18rem;
+        margin: 0;
+        /* padding: 0; */
+    }
+
+    #first-section-form{
+        margin-right: 0;
+    }
+
+    label {
+        font-size: 1.2rem;
+    }
+
+    input {
+        font-size: 1rem;
+        width: 15rem;
+    }
+
+    input[type='file']{
+        width: 15rem;
+        font-size: 1rem;
+    }
+
+    input[type='file']::file-selector-button{
+        font-size: 1rem;
+    }
+
+    textarea {
+        columns: 10;
+        height: auto;
+        font-size: 1rem;
+        width: 15rem;
+    }
+
+    #addImgPreview {
+        width: 255px
+    }
+
+
+    #portfolio-form-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-self: center;
+    }
+
+    .portfolio-form-btn#btn-add {
+        width: 15rem;
+    }
+
+    .portfolio-form-btn#btn-cancel {
+        width: 15rem;
+    }
+}
+
+
+
+/* 5. Editmodal */
+
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 3%;
+    width: 85%;
+    text-align: center;
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: #050d0d;
+    padding: 1rem;
+    border-radius: 40px;
+    /* border: 1px solid var(--one); */
+    z-index: 900;
+    display: none;
+}
+
+#modal-h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+@media (min-width: 840px) {
+    .modal {
+        left: calc(50% - 20rem);
+        width: 40rem;
+    }
+}
+
+/* 5. Overlay styles*/
+#backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 800;
+    display: none;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    background-color: #050d0d;
+    justify-content: center;
+    text-align: left;
+    margin: auto;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+#edit-portfolio-form > div.form-content.buttons {
+    flex-direction: row;
+    gap: 1rem;
+}
+
+#modal-h2-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#cancel-update-btn {
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white);
+    background-color: red;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: none;
+    transition: 150ms ease-in;
+}
+
+#cancel-update-btn:hover {
+    transform: scale(0.95);
+    box-shadow: 0px 0px 12px red;
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+}
+
+#saveChanges {
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white);
+    background-color: var(--one);
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: none;
+    transition: 150ms ease-in;
+}
+
+#saveChanges:hover {
+    transform: scale(0.95);
+    box-shadow: 0px 0px 12px var(one);
+    text-shadow: 1px 1px 8px var(--white);
+    cursor: pointer;
+}
+
+
+/* All code is checked with W3C'S code validator https://validator.w3.org/ */
