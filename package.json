@@ -4,10 +4,10 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "start": "start node server.js"
+        "start": "node server.js"
     },
     "engines": {
-        "node": "20.4.0"
+        "node": "18.18.2"
     },
     "keywords": [],
     "author": "William Falk",
