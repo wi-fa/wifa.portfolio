@@ -271,7 +271,7 @@ router.post('/admin', (req, res, next) => {
 router.get('/logout', (req, res) => {
     req.logout()
     // When logged out you get redirected to the home page
-    res.redirect('/')
+    res.redirect('/admin')
 })
 
 // GET route for the dashboard!

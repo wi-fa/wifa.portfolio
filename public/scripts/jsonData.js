@@ -81,25 +81,38 @@ function getDataFromLocal() {
 
 // Function to fill the navbar
 function populateNavbar(pagesData) {
+    // Order of navigation items
+    const order = ['home', 'about', 'contact', 'portfolio'];
+
     // Collection pages thats shouldnt be in the navbar
     const excludePages = ['thanks', 'error', '404'];
 
     // Selecting the navigation element
     const navList = document.querySelector('.navigation');
 
-    // Filter pages to show and create navigation items for each page except the excludePages
-    pagesData.filter((page) => !excludePages.includes(page.link.url))
-        .forEach((page) => {
-            // For each page we create a list item with an a element
+    // Create a map of pages for quicker access
+    const pageMap = {};
+    pagesData.forEach((page) => {
+        pageMap[page.link.url] = page;
+    });
+
+     // Looping the order array creating the navbar with the items that i want and not the ones i dont want
+
+     // I had to do this since the order of item in my db changed when dumped from the local db to atlas.
+     order.forEach((pageName) => {
+        const page = pageMap[pageName];
+        if (page && !excludePages.includes(pageName)) {
+            // Creating the elements for the pages that i want
             const li = document.createElement('li');
             const a = document.createElement('a');
             // Setting the href and text to the elements
             a.href = page.link.url;
             a.textContent = page.link.text;
-            // Appending them to the dom
+            // Appending them to the DOM
             li.appendChild(a);
             navList.appendChild(li);
-        });
+        }
+    });
 }
 
 // Function to update the hero section of the active page
@@ -180,7 +193,7 @@ function populateCards(data) {
 // Function to fill the about section
 function populateAboutSection(data) {
     // Taking the data from the the about page in the db
-    const aboutData = data[1].pageContent[0].content
+    const aboutData = data[4].pageContent[0].content
 
     // Selecting all the elements for the about section
     const aboutHeader = document.getElementById('about-header')
@@ -225,7 +238,7 @@ function populateAboutSection(data) {
 function populateContactSection(data) {
     console.log('Populating contact section');
     // Getting the data from my db
-    const contactData = data[2].pageContent[0].content
+    const contactData = data[5].pageContent[0].content
 
     // Updating the form title
     const formTitle = document.getElementById('form-title')
