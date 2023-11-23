@@ -1,0 +1,124 @@
+@import '/css/shared.css';
+
+/* 1. About-section */
+/* 2. Skill-section */
+/* 3. Mediaquerys */
+
+/* 1. About-section */
+
+main {
+    margin: 0 4rem;
+}
+
+#about-content {
+    margin-bottom: 2rem;
+}
+
+#text-and-photo {
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+#about-content h3 {
+    font-size: 2vw;
+}
+
+#text-and-photo img {
+    border-radius: 100px 100px 0 0;
+    object-fit: contain;
+    width: 20vw;
+}
+
+#text-and-photo p {
+    font-size: 1.9vw;
+
+    font-weight: 200;
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: none;
+}
+
+/* 2. Skill-section */
+
+#skills {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(43deg, #030303, #303030);
+    border: 1px solid var(--three);
+    border-radius: 40px;
+}
+
+#skills-and-experince {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#skills-and-experince h2 {
+    font-size: 2rem;
+}
+
+#skills-and-experince p {
+    font-size: 1.2rem;
+    margin: 0 3rem;
+    /* letter-spacing: 2px; */
+}
+
+#about-me-skills ul {
+    margin-top: 3rem;
+    padding: 0;
+    text-align: center;
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr;
+}
+
+#about-me-skills ul li a img {
+    width: 4rem;
+}
+
+/* 3. Mediaquerys */
+
+@media screen and (max-width: 840px) {
+    main {
+        margin: 0 1.8rem 0 1.8rem;
+    }
+
+    #about-content {
+        padding-bottom: 2rem;
+    }
+
+    #about-content h3 {
+        margin: 0 2rem 0 2rem;
+        font-size: 1.2rem;
+    }
+
+    #about-content p {
+        font-size: 1.3rem;
+    }
+
+    #about-content img {
+        width: 14rem;
+        margin: 0 auto;
+    }
+
+    #text-and-photo {
+        flex-direction: column-reverse;
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+    #skills-and-experince p {
+        margin: 0;
+    }
+}
+
+/* Mediaquerys for smaller screens */
+@media screen and (max-width: 420px) {
+    #about-me-skills ul {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+}
+
+/* All code is checked with W3C'S code validator https://validator.w3.org/ */

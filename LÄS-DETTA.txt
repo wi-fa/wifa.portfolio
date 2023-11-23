@@ -1,0 +1,6 @@
+Hej!
+Här har du min uppgift! Tror dock inte att du kommer se så mycket eftersom min databas ligger localt. Har inte publicerat den ännu men planerar att göra det med mongodb atlas och sedan publicera med vercel.
+
+Fråga gärna om det är något du undrar i koden.
+
+Hälsningar, William Falk

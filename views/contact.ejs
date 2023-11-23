@@ -1,0 +1,139 @@
+<!-- Här är min hemsida! Hemsidan är även publicerad på https://wifa.se via en cPanel och github pages. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Home page of a portfolio website for William Falk, a front-end developer from sweden"
+        />
+        <title>William Falk's Portfolio</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/shared.css" />
+        <link rel="stylesheet" href="/css/contact.css" />
+        <link rel="stylesheet" href="/css/overlay.css" />
+
+        <!-- JavaScript -->
+        <script src="scripts/jsonData.js" defer></script>
+        <script src="scripts/preloader.js" defer></script>
+        <script src="scripts/app.js" defer></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+        <!-- Favicon -->
+        <link rel="icon" href="images/Favicon-01.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="favicon.ico" type="image/x-icon" />
+
+        <!-- Hiding everything exceot backdrop  -->
+        <style>
+            body > *:not(#backdrop) {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Backdrop of modal -->
+        <div id="backdrop"></div>
+        <!-- End of backdrop -->
+
+        <header>
+            <!-- Navbar, modal and hero -->
+            <%- include('includes/header') %>
+            <!-- End of navbar, modal and hero -->
+        </header>
+
+        <!-- Main section with conatct form -->
+        <main id="contact-view">
+            <section class="contact-container">
+                <h2 id="form-title"></h2>
+                <form action="/contact" method="post" class="contact-form" spellcheck="false">
+                    <div id="form-row-1">
+                        <input
+                            type="text"
+                            name="firstName"
+                            autocomplete="off"
+                            placeholder=""
+                            id="firstName"
+                        />
+                        <input
+                            type="text"
+                            name="lastName"
+                            autocomplete="off"
+                            placeholder=""
+                            id="lastName"
+                        />
+                    </div>
+                    <div id="form-row-2">
+                        <input
+                            type="email"
+                            name="email"
+                            autocomplete="off"
+                            placeholder=""
+                            id="email"
+                        />
+                        <input
+                            type="tel"
+                            name="phone"
+                            autocomplete="off"
+                            placeholder=""
+                            pattern="[0-9]{10}"
+                            id="phone"
+                        />
+                    </div>
+                    <div id="form-row-3">
+                        <input
+                            type="text"
+                            name="subject"
+                            autocomplete="off"
+                            placeholder=""
+                            id="subject"
+                        />
+                    </div>
+                    <div id="form-row-4">
+                        <input
+                            type="text"
+                            name="message"
+                            autocomplete="off"
+                            placeholder=""
+                            id="message"
+                        />
+                    </div>
+                    <div id="form-btn">
+                        <button id="form-btn-element" type="submit" class="btn"></button>
+                    </div>
+                </form>
+            </section>
+            <!-- Contact-form end -->
+
+            <!-- Contact-form info text -->
+            <section id="contact-text-container">
+                <h2 id="contact-text-header"></h2>
+                <p id="contact-text-paragraph"></p>
+            </section>
+            <!-- End of text -->
+        </main>
+
+        <!-- Footer-section -->
+        <footer><%- include('includes/footer') %></footer>
+        <!-- End of footer -->
+
+        <!-- Preloader container -->
+        <div
+            id="preloader"
+            style="
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            "
+        >
+            <img src="images/preloader.gif" alt="preloader" />
+        </div>
+        <!-- End of preloader -->
+    </body>
+</html>
+
+<!-- All code is checked with W3C'S code validator https://validator.w3.org/ -->

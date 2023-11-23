@@ -1,0 +1,93 @@
+/* 1. Modal styles */
+/* 2. Overlay styles*/
+
+/* 1. Modal styles */
+
+.modal {
+    position: fixed;
+    top: 20%;
+    left: 3%;
+    width: 85%;
+    background: linear-gradient(43deg, #030303, #575757);
+    padding: 1rem;
+    border-radius: 40px;
+    box-shadow: 0 0px 28px rgba(201, 201, 201, 0.227);
+    border: 2px solid rgb(30, 30, 30);
+    z-index: 900;
+    display: none;
+}
+
+.modal h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal p {
+    text-align: center;
+    margin: 0;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+#modal-socails ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#modal-socails li {
+    list-style: none;
+    padding: 1rem;
+}
+
+aside img {
+    width: 120%;
+}
+
+#modal-email-phone li {
+    padding-right: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    list-style: none;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+#modal-email-phone li a {
+    padding-right: 1.4rem;
+}
+
+#modal-email-phone li a:hover {
+    color: rgb(43, 216, 144);
+}
+
+#close-modal-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+@media (min-width: 840px) {
+    .modal {
+        left: calc(50% - 20rem);
+        width: 40rem;
+    }
+}
+
+/* 2. Overlay styles*/
+#backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 800;
+    display: none;
+}
+
+/* All code is checked with W3C'S code validator https://validator.w3.org/ */
