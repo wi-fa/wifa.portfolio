@@ -4,7 +4,8 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node server.js",
+        "build": "echo 'No build process required for this app'"
     },
     "engines": {
         "node": "18.18.2"
