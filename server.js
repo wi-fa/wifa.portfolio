@@ -5,6 +5,7 @@ const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash')
+const rateLimit = require('express-rate-limit');
 const app = express();
 const User = require('./models').User;
 const pageVisitRoutes = require('./routes.js');
@@ -34,6 +35,28 @@ app.use(express.static('public'));
 
 // Parse URL-encoded
 app.use(express.urlencoded({ extended: false }));
+
+// Apply to all requests
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 50 // limit each IP to 100 requests per windowMs
+  });
+
+  //  apply to all requests
+  app.use(limiter);
+
+// Middlewear to block bots
+app.use((req, res, next) => {
+    const userAgent = req.headers['user-agent'];
+
+    // Check if the User-Agent is one that you want to block
+    if (userAgent.includes("BadBot")) {
+      return res.status(403).send('Access denied');
+    }
+
+    // If the User-Agent is not blocked, continue to the next middleware
+    next();
+  });
 
 // Configure express-session
 app.use(session({
