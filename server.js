@@ -36,10 +36,12 @@ app.use(express.static('public'));
 // Parse URL-encoded
 app.use(express.urlencoded({ extended: false }));
 
-// Apply to all requests
+// Limit requests (since my pageVisits was spammed after deploy)
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 50 // limit each IP to 100 requests per windowMs
+    // 15 minutes
+    windowMs: 15 * 60 * 1000,
+    // limit each IP to 50 requests per windowMs
+    max: 50 //
   });
 
   //  apply to all requests
