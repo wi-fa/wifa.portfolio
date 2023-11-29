@@ -297,6 +297,19 @@ main {
     font-size: 1.4rem;
 }
 
+input[type='checkbox']{
+    /* Hides the default checkbox appearance */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Makes the checkbox fully transparent */
+    background-color: transparent;
+    border: none;
+    outline: none;
+    opacity: 0;
+}
+
 /* Theme switch */
 #theme-switch {
     justify-content: center;
