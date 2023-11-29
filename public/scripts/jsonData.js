@@ -17,7 +17,6 @@ function extractActivePage() {
 function fetchPagesData() {
     // Check the active pages name
     const activePage = extractActivePage()
-
     //Then using axios to make a get request
     axios.get('/fetch-data')
         .then((response) => {
@@ -69,7 +68,6 @@ function getDataFromLocal() {
     try {
         // Get the data from local storage
         const storedData = localStorage.getItem(`pageData_all`);
-
         // If data exist we parse it then return it, else we return null
         return storedData ? JSON.parse(storedData) : null;
     } catch (error) {
@@ -105,9 +103,11 @@ function populateNavbar(pagesData) {
             // Creating the elements for the pages that i want
             const li = document.createElement('li');
             const a = document.createElement('a');
+
             // Setting the href and text to the elements
             a.href = page.link.url;
             a.textContent = page.link.text;
+
             // Appending them to the DOM
             li.appendChild(a);
             navList.appendChild(li);
@@ -117,6 +117,7 @@ function populateNavbar(pagesData) {
 
 // Function to update the hero section of the active page
 function updateHeroSection(data, activePage) {
+    //Debugging code for the hero
     console.log('Updating hero section for page:', activePage);
 
     // Selecting the hero elements
@@ -128,19 +129,24 @@ function updateHeroSection(data, activePage) {
 
     // If the data for the active page is found we update the hero section
     if (activePageData) {
+        // Creating the element for the pageSymbol in the header
         const pageSymbol = activePageData.pageSymbol;
         const titleContent = document.createElement('span');
         titleContent.textContent = activePageData.header;
 
+        // Setting the right style for the pageSymbol
         const brandColorSpan = document.createElement('span');
         brandColorSpan.className = 'brand-color';
         brandColorSpan.textContent = pageSymbol;
 
+        // Appending the element to the DOM
         titleContent.appendChild(brandColorSpan);
 
+        // Setting the hero and appending it to the DOM
         heroTitle.innerHTML = '';
         heroTitle.appendChild(titleContent);
 
+        // Changing the text in header
         heroParagraph.textContent = activePageData.headerParagraph;
     }
 }
@@ -158,25 +164,36 @@ function populateCards(data) {
     // Looping through each card key and updating the card elements
     cardKeys.forEach((key, index) => {
         const card = cardsData[key];
-        const cardIndex = index + 1; // So index 0 becomes 1
+        // So index 0 becomes 1
+        const cardIndex = index + 1;
 
+        // Selecting the cards h2's
         let cardTitles = document.getElementById(`card-${cardIndex}-h2`);
+
+        // Selecting the cards paragraphs
         let cardParagraphs = document.getElementById(`card-${cardIndex}-p`);
 
+        // Setting the right textcontent from db
         if (cardTitles) cardTitles.textContent = card.cardTitle;
-        if (cardParagraphs) cardParagraphs.textContent = card.cardParagraph;
+        // Making the paragraphs uppercase
+        if (cardParagraphs) cardParagraphs.textContent = card.
+        cardParagraph.toUpperCase()
 
+        // Skill card has a diffrent strucutre so i
+        // had to handle this card diffrent
+        // If skill-card
         if (key === 'skills') {
-            // Skill card has a diffrent strucutre so we have to handle this card diffrent
             for (let i = 1; i <= 4; i++) {
+                // Selecting the imgs/icons in the skill-card
                 const imgElement = document.getElementById(`skill-img${i}`);
                 if (imgElement) {
+                    // Setting the right src and alt
                     imgElement.src = card[`cardIcon${i}`];
                     imgElement.alt = card[`cardIconAlt${i}`];
                 }
             }
         } else {
-            // Handling the image for home, contact, and portfolio cards
+            // Handling the images for the home, contact, and portfolio cards
             const cardImg = document.getElementById(`card-${cardIndex}-img`);
             if (cardImg) {
                 cardImg.src = card.cardImg;
@@ -207,17 +224,11 @@ function populateAboutSection(data) {
         .querySelector('p')
     const skillIcons = document.querySelectorAll('#about-me-skills img')
 
-    // If the data is found the header and p elements is updated
+    // If the data is found the header, img and p elements is updated
     if (aboutData) {
         aboutHeader.textContent = aboutData.h3
         aboutParagraph.textContent = aboutData.longParagraph
-
-        // If a image is found the src and alt i set from the db
-        if (aboutData.img) {
-            aboutPhoto.src = aboutData.img
-            aboutPhoto.alt = ''
-        }
-
+        aboutPhoto.src = aboutData.img
         skillsHeader.textContent = aboutData.h2
         skillsText.textContent = aboutData.paragraph
 
@@ -232,11 +243,16 @@ function populateAboutSection(data) {
             })
         }
     }
+    // Debugging code for the memoji
+    if (!aboutPhoto) {
+    console.error("aboutPhoto element not found!");
+    return;
+    }
+
 }
 
 // Function to fill the contact section
 function populateContactSection(data) {
-    console.log('Populating contact section');
     // Getting the data from my db
     const contactData = data[5].pageContent[0].content
 
@@ -246,24 +262,27 @@ function populateContactSection(data) {
 
     // Updating input fields
     const formInputs = contactData.inputs
+    // Looping though every contactData input
     formInputs.forEach((inputData) => {
+        // Selecting all input elements
         const inputElement = document.querySelector(
             `input[name="${inputData.name}"]`
         )
+        // If the elemets exist we update the elements
         if (inputElement) {
-
             inputElement.type = inputData.type
             inputElement.placeholder = inputData.placeholder
             inputElement.required = inputData.required
         }
     })
 
+    // Selecting the submit btn and adding text to it
     const formBtn = document.getElementById('form-btn-element')
     formBtn.textContent = contactData.submitButton.text
 
+    // Selecting the text above/aside the form and updating the text
     const contactTextHeader = document.getElementById('contact-text-header')
     const contactTextParagraph = document.getElementById('contact-text-paragraph')
-
     contactTextHeader.textContent = contactData.contactHeader
     contactTextParagraph.textContent = contactData.contactParagraph
 }

@@ -5,13 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Iterates over each message card
     messageCards.forEach(card => {
-        // Adds a click event listener to the element with class 'message-summary' inside the card
+        // Adds a click event listener to the message-summary elements inside the card
         card.querySelector('.message-summary').addEventListener('click', () => {
-            // Selects the element with class 'message-details' inside the card
+            // Selecting the elements
             const details = card.querySelector('.message-details');
 
-            // Toggles the 'expanded' class on the details element
-            // This is typically used to show or hide additional information
+            // Toggle the 'expanded' class on the details element
             details.classList.toggle('expanded');
         });
     });

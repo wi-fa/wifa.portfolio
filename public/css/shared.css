@@ -1,8 +1,21 @@
-/* Root settings */
+/* 1. Root */
+/* 2. Html and body settings */
+/* 3. Buttons and links */
+/* 4. Navbar */
+/* 5. Hero-section */
+/* 6. Main-section */
+/* 7. Footer */
 
-* {
+/* 1. Root settings */
+/* Dark theme variables (default) */
+:root {
+    --backg: black;
     --white: white;
     --black: black;
+    --darkani: linear-gradient(43deg, #030303, #303030);
+    --input: rgb(52, 52, 52);
+    --inputactive: rgb(43, 216, 144);
+    --contactform: linear-gradient(43deg, #030303, #303030);
     --one: rgb(43, 216, 144);
     --two: rgb(29, 130, 87);
     --three: rgb(30, 30, 30);
@@ -10,29 +23,34 @@
     --five: rgb(134, 240, 196);
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    --backg: rgb(213, 233, 195);
+    --white: black;
+    --black: white;
+    --darkani: linear-gradient(43deg, #f2f2f2, #3ace7f);
+    --input: rgb(228, 237, 232);
+    --inputactive: rgb(178, 237, 212);
+    --contactform: linear-gradient(43deg, rgb(138, 239, 197), rgb(138, 239, 197));
+    --one: rgb(43, 216, 144);
+    --two: rgb(138, 239, 197);
+    --three: rgb(245, 245, 245);
+    --four: rgb(50, 50, 50);
+    --five: rgb(100, 180, 100);
+}
+
 .brand-color {
     color: var(--one);
 }
 
-@media screen and (max-width: 840px) {
-    * {
-        -webkit-transiation: all 0.35s ease;
-        -moz-transiation: all 0.35s ease;
-        -o-transition: all 0.35s ease;
-        transition: all 0.35s ease;
-    }
+* {
+    -webkit-transiation: all 0.10s ease;
+    -moz-transiation: all 0.10s ease;
+    -o-transition: all 0.10s ease;
+    transition: all 0.10s ease;
 }
 
-/* Description */
-
-/* 1. Html and body settings */
-/* 2. Buttons and links */
-/* 3. Navbar */
-/* 4. Hero-section */
-/* 5. Main-section */
-/* 6. Footer */
-
-/* 1. Html and body settings */
+/* 2. Html and body settings */
 html,
 body {
     margin: auto;
@@ -44,7 +62,7 @@ body {
         Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
         sans-serif;
     color: var(--white);
-    background-color: var(--black);
+    background-color: var(--backg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -53,8 +71,7 @@ body {
     display: none;
 }
 
-/* 2. Buttons and links */
-
+/* 3. Buttons and links */
 /* Default button style */
 button {
     font-size: 1.1rem;
@@ -72,7 +89,7 @@ button {
 button:hover {
     transform: scale(0.95);
     box-shadow: 0px 0px 12px var(--one);
-    text-shadow: 1px 1px 8px var(--white);
+    /* text-shadow: 1px 1px 8px var(--white); */
     cursor: pointer;
 }
 
@@ -85,8 +102,7 @@ a {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* 3. Navbar */
-
+/* 4. Navbar */
 /* Navbar display settings */
 #navbar {
     display: flex;
@@ -149,8 +165,7 @@ a {
     }
 }
 
-/* 4. Hero-section */
-
+/* 5. Hero-section */
 #hero-container {
     margin: 5rem 4rem;
 }
@@ -220,8 +235,7 @@ div.head-line-ver {
     }
 }
 
-/* 5. Main-section */
-
+/* 6. Main-section */
 /* main-size */
 main {
     margin: 2rem 3rem;
@@ -234,8 +248,7 @@ main {
     }
 }
 
-/* 6. Footer */
-
+/* 7. Footer */
 .foot {
     display: flex;
     flex-direction: column;
@@ -244,8 +257,12 @@ main {
     text-align: center;
     letter-spacing: 2px;
     font-size: 1rem;
-    font-weight: 200;
-    color: var(--four);
+    font-weight: 300;
+    color: var(--white);
+}
+
+#octocat {
+    color: #3ace7f;
 }
 
 .foot ul {
@@ -279,6 +296,62 @@ main {
 .foot span.brand-color {
     font-size: 1.4rem;
 }
+
+/* Theme switch */
+#theme-switch {
+    justify-content: center;
+    text-align: center;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 1rem;
+  }
+
+  /* The slider */
+  .switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--three);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+
+  .switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: var(--one);
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px var(--one);
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
 
 
 /* All code is checked with W3C'S code validator https://validator.w3.org/ */

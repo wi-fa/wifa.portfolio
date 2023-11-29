@@ -1,17 +1,52 @@
 //Declaring the chart variable
 let myChart
 
+// Setting the theme colors for the charts to match the root elements theme
+const themeColors = {
+    light: {
+        textColor: 'black',
+    },
+    dark: {
+        textColor: 'white',
+    }
+}
+
+// Function to update the chart text and doughnut border colors depending on the theme
+function updateChartColors(theme) {
+    const currentThemeColors = themeColors[theme];
+    // Line charts changes
+    if (myChart) {
+        myChart.options.scales.y.ticks.color = currentThemeColors.textColor;
+        myChart.options.scales.x.ticks.color = currentThemeColors.textColor;
+        myChart.options.plugins.legend.labels.color = currentThemeColors.textColor;
+        myChart.options.plugins.title.color = currentThemeColors.textColor;
+        myChart.update();
+    }
+    const doughnutChart = Chart.getChart('myDonutChart');
+    // Donut changes
+    if (doughnutChart) {
+        doughnutChart.options.plugins.legend.labels.color = currentThemeColors.textColor;
+        doughnutChart.options.plugins.title.color = currentThemeColors.textColor;
+        doughnutChart.update();
+    }
+}
+
+// Function to initialize chart colors based on the current theme
+function initChartColors() {
+    // Getting the theme from local or setting it to dark
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    // Updating the colors depending on what theme is in localstorage
+    updateChartColors(currentTheme);
+}
+
 // Asynchronous function to fetch data from an API endpoint
 async function fetchDayData(days) {
     // Using 'fetch' to make an HTTP request to the specified endpoint
     const response = await fetch(`/api/page-stats?days=${days}`)
-
     // Parsing the JSON response body
     const data = await response.json()
-
     // Logging the fetched data to the console for debugging
     console.log('Fetched data:', data)
-
     // Returning the data received from the API
     return data
 }
@@ -20,118 +55,94 @@ async function fetchDayData(days) {
 async function fetchData() {
     // Using 'fetch' to make an HTTP request to the specified endpoint
     const response = await fetch('/api/page-stats')
-
     // Parsing the JSON response body
     const data = await response.json()
-
     // Logging the fetched data to the console for debugging
     console.log('Fetched data:', data)
-
     // Returning the data received from the API
     return data
 }
 
-// Function to update or create the chart
 async function updateChart(days) {
-    // Fetch data for the specified number of days from the API
+    // Fetching the data for specific amount of days
     const statsData = await fetchData(days)
-
-    // Creating an array to store the number of visits for each day
+    // Creating an array for visitData with 0
     let visitsData = new Array(days).fill(0)
-
-    // Here we loop over the fetched daily visits data
-    for (let i = 0; i < statsData.dailyVisits.length; i++) {
-        // Adding the data from visitsData to the array so its match the right day
-        visitsData[days - statsData.dailyVisits.length + i] =
-            statsData.dailyVisits[i]
-    }
-
-    // Setting up the data to be displayed in the chart
+    // Setting the array with the real data
+    statsData.dailyVisits.forEach((visit, i) => {
+        visitsData[days - statsData.dailyVisits.length + i] = visit
+    })
+    // Setting the chart structure
     const chartData = {
-        // Creating labels for each day (day 1, day 2, day 3 etc)
+        // Creating labels for each day from the API
         labels: [...Array(days).keys()].map((day) => `Day ${day + 1}`),
         datasets: [
             {
-                // Name of the data
+                // Labels, data and styling
                 label: 'Visitors',
-                // The data itself
                 data: visitsData,
-                // Styling for the data
                 borderColor: '#2bd890',
                 backgroundColor: '#2bd890',
                 borderWidth: 2
             }
         ]
     }
-
-    // Selecting the canvas element from DOM
+    // Getting the canvas for the right chart
     const ctx = document.getElementById('my7DaysChart')
-
-    // Checking if the chart already exists
     if (myChart) {
-        // If chart already exists, update its data
+        // Updating the existing chart data
         myChart.data = chartData
+        // Updating chart
         myChart.update()
     } else {
-        // If not, we create a new chart
+        // Creating new chart if it doenst exist
         myChart = new Chart(ctx, {
+            // Chart config
             // Type of chart
             type: 'line',
-            // Actual data
             data: chartData,
-            // Chart option like behavior, responsiveness, scales etc
+            // Chart options
             options: {
-                // Makes the chart responsive to window resizing
+                // Making chart responsive
                 responsive: true,
-                // Making it super responsive. :D
                 maintainAspectRatio: false,
+                // y and x axis config
                 scales: {
                     y: {
-                        // Configuration for the Y-axis
-                        // Setting maximum value
+                        // y axis max
                         suggestedMax: 100,
-                        // Starts scale from zero
                         beginAtZero: true,
                         ticks: {
-                            // Step size between ticks
+                            // Step between ticks
                             stepSize: 20,
-                            // Tick styling
-                            color: 'white',
-                            font: { family: 'system-ui' } // Font style for the ticks
+                            // Tick styles
+                            color: themeColors.dark.textColor,
+                            font: { family: 'system-ui' }
                         }
                     },
                     x: {
-                        // Configuration for the X-axis, in this case only styling
+                        // X axis ticks styling
                         ticks: {
-                            color: 'white',
+                            color: themeColors.dark.textColor,
                             font: { family: 'system-ui' }
                         }
                     }
                 },
                 plugins: {
-                    // This datalabels was i plugin i used to show percentage in the actual chart
-                    // I removed it because it didnt give me the result i wanted
-                    // But im keeping it here for future if i want to use it again
-                    // But for now its set to display false..
-                    datalabels: {
-                        display: false // Hide the data labels
-                    },
-                    // Configuration for the chart legend
                     legend: {
-                        // Position of the legend
+                        // Legend position
                         position: 'top',
+                        // Label styles
                         labels: {
-                            // Styling for the labels
-                            color: 'white',
+                            color: themeColors.dark.textColor,
                             font: { family: 'system-ui' }
                         }
                     },
-                    // Configuration for the chart title
+                    // Title styles
                     title: {
-                        // Text and styling for the title
                         display: true,
                         text: 'Total visits on the homepage',
-                        color: 'white',
+                        color: themeColors.dark.textColor,
                         font: { family: 'system-ui' }
                     }
                 }
@@ -158,9 +169,9 @@ async function renderPageVisitDonutChart() {
         const ctx = document.getElementById('myDonutChart')
 
         // Check if there's already a chart instance and destroy it
-    if (Chart.getChart(ctx)) {
-        Chart.getChart(ctx).destroy();
-    }
+        if (Chart.getChart(ctx)) {
+            Chart.getChart(ctx).destroy()
+        }
 
         // Creating a new chart
         new Chart(ctx, {
@@ -204,7 +215,7 @@ async function renderPageVisitDonutChart() {
                         position: 'top',
                         // Label styling
                         labels: {
-                            color: 'white',
+                            color: themeColors.dark.textColor,
                             font: { family: 'system-ui' }
                         }
                     },
@@ -253,18 +264,59 @@ async function renderPageVisitDonutChart() {
     }
 }
 
+// DOMContentLoaded event listener to initialize charts and buttons
+document.addEventListener('DOMContentLoaded', async () => {
+    // Update the line chart
+    await updateChart(daysMode);
+    // Render the doughnut chart
+    await renderPageVisitDonutChart();
+    // Setting chart color depending on the theme
+    initChartColors();
+    // Setting chart toggle button styles to show the active chart
+    updateButtonStyles();
+    // Moving the button with javascript since chart.js is stupid and streching down until the page crashes
+    repositionButtons();
+});
+
+// Theme toggle event listener
+document.getElementById('theme-toggle').addEventListener('change', async function(e) {
+    let theme;
+    // Check if the toggle switch is in the 'checked' state
+    if (e.target.checked) {
+        // Set theme to dark if the toggle is checked
+        theme = 'dark';
+    } else {
+        // Set theme to light if the toggle is not checked
+        theme = 'light';
+    }
+
+    // Apply the selected theme to the root element and then store it in local storage
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+
+    // Setting chart color depending on the theme
+    initChartColors();
+    // Update the line chart
+    await updateChart(daysMode);
+    // Render the doughnut chart
+    await renderPageVisitDonutChart();
+    // Setting chart toggle button styles to show the active chart
+    updateButtonStyles();
+});
 
 // Function to update the tooltip based on the display mode
 function updateTooltipForDisplayMode() {
-    // Get the chart instance
+    // Get the donutchart instance
     const chart = Chart.getChart('myDonutChart')
     if (chart) {
+        // Setting the tooltip label depending if percent or visits
         chart.options.plugins.tooltip.callbacks.label = function (context) {
             let label = context.label || ''
             if (label) {
                 label += ': '
             }
             if (displayMode === 'percent') {
+                // Getting the percent
                 let value = context.raw
                 let sum = context.chart.data.datasets[0].data.reduce(
                     (a, b) => a + b,
@@ -273,34 +325,16 @@ function updateTooltipForDisplayMode() {
                 let percentage = ((value * 100) / sum).toFixed(2) + '%'
                 label += percentage
             } else {
-                // In 'visits' mode, just show the raw visit count
+                // In visits mode, just show the visit count from db
                 label += context.raw
             }
+            // return the label
             return label
         }
         // Update the chart to display the changes
         chart.update()
     }
 }
-
-// Event listener for the 'Show Percentage' button
-document.getElementById('btnPercent').addEventListener('click', () => {
-    // Change mode to 'percent'
-    displayMode = 'percent'
-    // Update the tooltip
-    updateTooltipForDisplayMode()
-})
-
-// Event listener for the 'Show Visits' button
-document.getElementById('btnVisits').addEventListener('click', () => {
-    // Change mode to 'visits'
-    displayMode = 'visits'
-    // Update the tooltip
-    updateTooltipForDisplayMode()
-})
-
-// Initial chart rendering (already in your code)
-renderPageVisitDonutChart()
 
 // Function to update button styles
 function updateButtonStyles() {
@@ -309,87 +343,96 @@ function updateButtonStyles() {
     const btnSevenDays = document.getElementById('btnSevenDays')
     const btnThirtyDays = document.getElementById('btnThirtyDays')
 
-    // Update styles for percentage/visits buttons
-    btnPercent.style.backgroundColor = displayMode === 'percent' ? 'rgb(29, 130, 87)' : ''
-    btnVisits.style.backgroundColor = displayMode === 'visits' ? 'rgb(29, 130, 87)' : ''
+    // Update styles for percentage/visits buttons depending on what mode is active
+    btnPercent.style.backgroundColor =
+        displayMode === 'percent' ? 'rgb(29, 130, 87)' : ''
+    btnVisits.style.backgroundColor =
+        displayMode === 'visits' ? 'rgb(29, 130, 87)' : ''
 
-    // Update styles for 7 days/30 days buttons
-    btnSevenDays.style.backgroundColor = daysMode === 7 ? 'rgb(29, 130, 87)' : ''
-    btnThirtyDays.style.backgroundColor = daysMode === 30 ? 'rgb(29, 130, 87)' : ''
+    // Update styles for 7 days/30 days buttons depepending on what mode is active
+    btnSevenDays.style.backgroundColor =
+        daysMode === 7 ? 'rgb(29, 130, 87)' : ''
+    btnThirtyDays.style.backgroundColor =
+        daysMode === 30 ? 'rgb(29, 130, 87)' : ''
 }
 
 // Event listeners for the donut chart buttons
 document.getElementById('btnPercent').addEventListener('click', () => {
+    // Set displaymode to percent
     displayMode = 'percent'
+    // Updating tooltipcontent
     updateTooltipForDisplayMode()
+    // Updating btn styles
     updateButtonStyles()
 })
-
 document.getElementById('btnVisits').addEventListener('click', () => {
+    // Set displaymode to visits
     displayMode = 'visits'
+    // Updating the tooltipcontent
     updateTooltipForDisplayMode()
+    // Updating btn styles
     updateButtonStyles()
 })
 
-// Event listeners for the line chart buttons
+// Event listeners for the 7 days line chart buttons
 document.getElementById('btnSevenDays').addEventListener('click', () => {
-    daysMode = 7;
+    daysMode = 7
     // Calling updateChart with 7 days
-    updateChart(7);
-    updateButtonStyles();
-});
-
+    updateChart(7)
+    // Updating btn styles
+    updateButtonStyles()
+})
+// Event listeners for the 30 days line chart buttons
 document.getElementById('btnThirtyDays').addEventListener('click', () => {
-    daysMode = 30;
+    daysMode = 30
     // Calling updateChart with 30 days
-    updateChart(30);
-    updateButtonStyles();
-});
-
-// setting variables to track the current display mode and days mode
-// Default mode for donut chart
-let displayMode = 'percent';
-// Default mode for line chart (7 or 30 days)
-let daysMode = 7;
-
-// Setting the chart with the default view when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    // Setting the line chart with default days mode
-    updateChart(daysMode);
-    // Render my donut chart
-    renderPageVisitDonutChart();
-    // Setting initial styles for the buttons
-    updateButtonStyles();
+    updateChart(30)
+    // Updating btn styles
+    updateButtonStyles()
 })
 
 // Function to handle the repositioning of buttons based on screen width
+// This was becuase chart js is a real pain in the ass. When i placed the button below the
+// chart container the cart kept streching down when the page was loaded making the page
+// crash so i had to position the btns like this..
 function repositionButtons() {
     // Get the width of the window
-    const screenWidth = window.innerWidth;
+    const screenWidth = window.innerWidth
 
     // Get the buttons and the chart containers
-    const btnContainerForFirstChart = document.querySelector('#buttons-for-first-chart');
-    const btnContainerForSecondChart = document.querySelector('#buttons-for-second-chart');
-    const firstChartContainer = document.querySelector('#dash-card-1');
-    const secondChartContainer = document.querySelector('#dash-card-2');
+    const btnContainerForFirstChart = document.querySelector(
+        '#buttons-for-first-chart'
+    )
+    const btnContainerForSecondChart = document.querySelector(
+        '#buttons-for-second-chart'
+    )
+    const firstChartContainer = document.querySelector('#dash-card-1')
+    const secondChartContainer = document.querySelector('#dash-card-2')
 
     // Check if we're in mobile view
     if (screenWidth < 768) {
-      // If in mobile view, insert the button containers before their respective charts
-      firstChartContainer.parentNode.insertBefore(btnContainerForFirstChart, firstChartContainer);
-      secondChartContainer.parentNode.insertBefore(btnContainerForSecondChart, secondChartContainer.nextSibling);
+        // If in mobile view, insert the button containers before their respective charts
+        firstChartContainer.parentNode.insertBefore(
+            btnContainerForFirstChart,
+            firstChartContainer
+        )
+        secondChartContainer.parentNode.insertBefore(
+            btnContainerForSecondChart,
+            secondChartContainer.nextSibling
+        )
     } else {
-      // If in desktop view, restore the button containers to their original position
-      const chartBtnContainer = document.querySelector('#chart-btn');
-      if (chartBtnContainer) {
-        chartBtnContainer.appendChild(btnContainerForFirstChart);
-        chartBtnContainer.appendChild(btnContainerForSecondChart);
-      }
+        // If in desktop view, restore the button containers to their original position
+        const chartBtnContainer = document.querySelector('#chart-btn')
+        if (chartBtnContainer) {
+            chartBtnContainer.appendChild(btnContainerForFirstChart)
+            chartBtnContainer.appendChild(btnContainerForSecondChart)
+        }
     }
-  }
+}
 
-  // Add event listener for window resize
-  window.addEventListener('resize', repositionButtons);
+// Add event listener for window resize
+window.addEventListener('resize', repositionButtons)
 
-  // Call the function on script load to check initial position
-  repositionButtons();
+// Variables for display mode and days mode
+let displayMode = 'percent';
+let daysMode = 7;

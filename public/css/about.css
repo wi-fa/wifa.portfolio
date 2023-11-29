@@ -5,7 +5,6 @@
 /* 3. Mediaquerys */
 
 /* 1. About-section */
-
 main {
     margin: 0 4rem;
 }
@@ -27,7 +26,8 @@ main {
 #text-and-photo img {
     border-radius: 100px 100px 0 0;
     object-fit: contain;
-    width: 20vw;
+    width: 15vw;
+    padding-right: 1rem;
 }
 
 #text-and-photo p {
@@ -40,13 +40,26 @@ main {
 }
 
 /* 2. Skill-section */
-
 #skills {
     margin-top: 2rem;
     padding: 2rem;
-    background: linear-gradient(43deg, #030303, #303030);
+    background: var(--contactform);
     border: 1px solid var(--three);
     border-radius: 40px;
+    animation: backgroundani 5s ease infinite;
+    transition: 100ms;
+}
+
+@keyframes backgroundani {
+    0% {
+        background-position: 24% 0%;
+    }
+    50% {
+        background-position: 77% 100%;
+    }
+    100% {
+        background-position: 24% 0%;
+    }
 }
 
 #skills-and-experince {
@@ -61,7 +74,6 @@ main {
 #skills-and-experince p {
     font-size: 1.2rem;
     margin: 0 3rem;
-    /* letter-spacing: 2px; */
 }
 
 #about-me-skills ul {
@@ -74,12 +86,12 @@ main {
     grid-template-rows: 1fr 1fr;
 }
 
+
 #about-me-skills ul li a img {
     width: 4rem;
 }
 
 /* 3. Mediaquerys */
-
 @media screen and (max-width: 840px) {
     main {
         margin: 0 1.8rem 0 1.8rem;

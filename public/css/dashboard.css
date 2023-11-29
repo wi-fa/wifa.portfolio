@@ -1,37 +1,59 @@
 /* 1. Root settings */
-
 /* 2. Dashboard Layout */
 /* 3. Portfolio admin page */
 /* 4. Add portfolio item */
 /* 5. Editmodal */
-/* 5. Overlay styles*/
+/* 6. Overlay styles*/
+/* 7. Theme toggle */
 
 
 /* 1. Root settings */
-
-* {
+/* Dark theme variables (default) */
+:root {
+    --backg: black;
     --white: white;
-    --black: #000000;
-    --one: #2bd890;
+    --black: black;
+    --darkani: linear-gradient(43deg, #030303, #303030);
+    --input: rgb(52, 52, 52);
+    --inputactive: rgb(43, 216, 144);
+    --sidemenu: #050d0d;
+    --svg: rgb(43, 216, 144);
+    --dashcards: linear-gradient(43deg, #050d0d, #050d0d);
+    --one: rgb(43, 216, 144);
     --two: rgb(29, 130, 87);
     --three: rgb(30, 30, 30);
     --four: rgb(197, 197, 197);
     --five: rgb(134, 240, 196);
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    --backg: rgb(213, 233, 195);
+    --white: black;
+    --black: white;
+    --darkani: linear-gradient(43deg, #f2f2f2, #3ace7f);
+    --input: rgb(186, 226, 201);
+    --inputactive: rgb(138, 239, 197);
+    --sidemenu: rgb(43, 216, 144);
+    --svg: black;
+    --dashcards: linear-gradient(43deg, rgb(138, 239, 197), rgb(138, 239, 197));
+    --one: rgb(43, 216, 144);
+    --two: rgb(138, 239, 197);
+    --three: rgb(245, 245, 245);
+    --four: rgb(50, 50, 50);
+    --five: rgb(100, 180, 100);
+}
+
+* {
+    -webkit-transiation: all 0.10s ease;
+    -moz-transiation: all 0.10s ease;
+    -o-transition: all 0.10s ease;
+    transition: all 0.10s ease;
+}
+
 .brand-color {
     color: var(--one);
 }
-
-@media screen and (max-width: 840px) {
-    * {
-        -webkit-transiation: all 0.35s ease;
-        -moz-transiation: all 0.35s ease;
-        -o-transition: all 0.35s ease;
-        transition: all 0.35s ease;
-    }
-}
-
 
 
 html,
@@ -44,18 +66,17 @@ body {
         Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
         sans-serif;
     color: var(--white);
-    background-color: var(--black);
+    background-color: var(--backg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 /* 2. Dashboard Layout */
-
 .dashboard-container {
     display: flex;
     min-height: 100vh;
     border-radius: 40px;
-    background-color: #000000;
+    background-color: var(--backg);
 }
 
 
@@ -66,14 +87,12 @@ body {
 
 .dashboard-sidebar {
     width: 230px;
-    background-color: #050d0d;
-    color: rgb(194, 194, 194);
+    background-color: var(--sidemenu);
     min-height: 100vh;
     border-radius: 40px;
     display: flex;
     justify-content: space-around;
     padding-top: 2rem;
-
     transition: left 0.3s;
 }
 
@@ -95,7 +114,7 @@ svg {
     width: 13%;
     padding-right: 1rem;
     margin-left: 1rem;
-    color: var(--one);
+    color: var(--svg);
 }
 
 .dashboard-sidebar nav #sidebar-img {
@@ -103,7 +122,7 @@ svg {
 }
 
 .dashboard-sidebar nav ul li a {
-    color: white;
+    color: var(--white);
     letter-spacing: 2px;
     text-decoration: none;
     display: flex;
@@ -117,18 +136,17 @@ svg {
 }
 
 .dashboard-sidebar nav ul li a:hover {
-    background-color: var(--one);
+    background-color: var(--inputactive);
     box-shadow: 0px 0px 12px var(--one);
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
 }
 
 /* Dashboard content */
-
 .dashboard-content {
     flex: 1;
     overflow-y: auto;
-    background: linear-gradient(43deg, #000000, #000000);
+    background: var(--backg);
     transition: 100ms;
     border-radius: 20px;
 }
@@ -147,11 +165,28 @@ svg {
 #dashboard-header {
     display: flex;
     flex-direction: column;
-    background-color: var(--black);
+    background-color: var(--backg);
     align-items: left;
     justify-content: center;
     padding: 2rem 1.5rem 0.5rem 1rem;
 }
+
+#dashboard-header-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.7rem;
+    margin-right: 1rem;
+    columns: var(--white);
+}
+
+#dashboard-header-info2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
 
 #dashboard-h4-default {
     font-size: 1.3rem;
@@ -172,14 +207,14 @@ svg {
 }
 
 .options {
-    background: linear-gradient(43deg, #050d0d, #050d0d);
+    background: var(--dashcards);
     border-radius: 20px;
     width: 100%;
 }
 
 #content-options a {
     text-decoration: none;
-    color: white;
+    color: var(--white);
     text-align: center;
 }
 
@@ -193,7 +228,7 @@ svg {
     box-sizing: border-box;
     padding: 2rem;
     border-radius: 20px;
-    background: linear-gradient(43deg, #050d0d, #050d0d);
+    background: var(--dashcards);
     min-height: 200px;
 }
 
@@ -228,8 +263,11 @@ svg {
     margin-bottom: 1rem;
 }
 
-/* Dashboard content mediaquerys */
+#switch-foot {
+    display: none;
+}
 
+/* Dashboard content mediaquerys */
 @media screen and (max-width: 768px) {
     .dashboard-container {
         display: block;
@@ -245,12 +283,12 @@ svg {
     #back-arrow {
         font-size: 2rem;
         margin: 0;
-        color: #2bd890;
+        color: var(--one);
         cursor: pointer;
     }
 
     #back-arrow:hover {
-        color: #14794f;
+        color: var(--two);
     }
 
     .dashboard-sidebar {
@@ -293,12 +331,18 @@ svg {
         margin-top: -1rem;
     }
 
+    #switch-foot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
 
 
 
 /* 3. Portfolio admin page */
-
 #portfolio-items-container {
     display: flex;
     flex-wrap: wrap;
@@ -309,16 +353,15 @@ svg {
 
 
 /* Portfolio item libraby */
-
 .portfolio-cards {
     box-sizing: border-box;
     padding: 2rem;
     border-radius: 20px;
-    background: linear-gradient(43deg, #050d0d, #050d0d);
+    background: var(--dashcards);
     transition: transform 0.3s ease;
     width: calc(
         50% - 2rem
-    ); /* Adjust this to control the number of columns on larger screens */
+    );
 }
 
 .portfolio-cards h2 {
@@ -331,13 +374,13 @@ svg {
 }
 
 .portfolio-cards a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
-    display: block; /* Change to block to avoid stretching the anchor */
+    display: block;
 }
 
 .portfolio-cards img {
-    width: 100%; /* Full width of the card */
+    width: 100%;
     height: auto;
     display: block;
 }
@@ -362,17 +405,18 @@ a.btn {
 a.btn:hover {
     transform: scale(0.95);
     box-shadow: 0px 0px 12px var(--one);
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
 }
 
 a#delete.btn {
     background-color: red;
+    color: var(--white);
 }
 a#delete.btn:hover {
     transform: scale(0.95);
     box-shadow: 0px 0px 12px red;
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
 }
 
@@ -385,7 +429,6 @@ a#delete.btn:hover {
 }
 
 /* 4. Add portfolio item */
-
 #add-portfolio-container {
     width: 95%;
 }
@@ -402,7 +445,7 @@ form {
     display: flex;
     margin-bottom: 1rem;
     padding: 2rem;
-    background-color: #050d0d;
+    background-color: var(--backg);
     border-radius: 20px;
     width: 55rem;
 }
@@ -414,9 +457,9 @@ input {
     font-size: 1.3rem;
     font-weight: 600;
     height: 3rem;
-    color: white;
+    color: var(--white);
     width: 25rem;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--backg);
     padding-left: 0.5rem;
     margin-bottom: 2rem;
     border: none;
@@ -429,9 +472,9 @@ input[type='file'] {
     height: auto;
     width: 25rem;
     max-width: 100%;
-    color: #ffffff;
+    color: var(--white);
     padding: 8px;
-    background: rgba(52, 52, 52, 0);
+    background: var(--backg);
     outline: none;
     border: none;
 }
@@ -442,14 +485,14 @@ input[type='file']::file-selector-button {
     background: var(--one);
     padding: 10px 20px;
     border-radius: 10px;
-    color: #fff;
+    color: var(--white);
     cursor: pointer;
     transition: 0.2s ease-in-out;
 }
 
 input[type='file']::file-selector-button:hover {
     box-shadow: 0px 0px 12px var(--one);
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
     transform: scale(0.97);
 }
@@ -460,10 +503,10 @@ textarea {
         sans-serif;
     font-size: 1.3rem;
     font-weight: 600;
-    color: white;
+    color: var(--white);
     height: 3.5rem;
     width: 25rem;
-    background-color: rgba(52, 52, 52, 0);
+    background-color: var(--backg);
     padding-left: 0.5rem;
     margin-bottom: 1rem;
     border: none;
@@ -475,7 +518,7 @@ input:focus,
 input:active,
 textarea:active,
 textarea:focus {
-    color: white;
+    color: var(--white);
 }
 
 label {
@@ -494,6 +537,7 @@ label {
     flex-direction: column;
     transition: 150ms ease;
     width: 59rem;
+    color: var(--white);
 }
 
 .portfolio-form-btn#btn-add {
@@ -506,7 +550,7 @@ label {
     background: var(--one);
     padding: 1rem 4rem;
     border-radius: 10px;
-    color: #fff;
+    color: var(--white);
     cursor: pointer;
     transition: 0.2s ease-in-out;
     width: 59rem;
@@ -516,7 +560,7 @@ label {
 .portfolio-form-btn#btn-add:hover {
     transform: scale(0.99);
     box-shadow: 0px 0px 12px var(--one);
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
 }
 
@@ -530,7 +574,7 @@ label {
     background: red;
     padding: 1rem 4rem;
     border-radius: 10px;
-    color: #fff;
+    color: var(--white);
     cursor: pointer;
     transition: 0.2s ease-in-out;
     width: 59rem;
@@ -539,12 +583,11 @@ label {
 .portfolio-form-btn#btn-cancel:hover {
     transform: scale(0.99);
     box-shadow: 0px 0px 12px red;
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
 }
 
 /* Mediaquerys for the add portfolio */
-
 @media screen and (max-width: 768px) {
     .content-container#add-portfolio {
         width: 44rem;
@@ -610,7 +653,6 @@ label {
     form {
         width: 18rem;
         margin: 0;
-        /* padding: 0; */
     }
 
     #first-section-form{
@@ -655,18 +697,19 @@ label {
     }
 
     .portfolio-form-btn#btn-add {
-        width: 15rem;
+        width: 16rem;
+        margin-left: 1rem;
     }
 
     .portfolio-form-btn#btn-cancel {
-        width: 15rem;
+        width: 16rem;
+        margin-left: 1rem;
     }
 }
 
 
 
 /* 5. Editmodal */
-
 .modal {
     position: fixed;
     top: 10%;
@@ -675,11 +718,9 @@ label {
     text-align: center;
     max-height: 80vh;
     overflow-y: auto;
-    background-color: #050d0d;
     padding: 1rem;
     border-radius: 40px;
-    /* border: 1px solid var(--one); */
-    z-index: 900;
+    z-index: 999;
     display: none;
 }
 
@@ -687,7 +728,7 @@ label {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: white;
+    color: var(--white);
 }
 
 @media (min-width: 840px) {
@@ -697,22 +738,9 @@ label {
     }
 }
 
-/* 5. Overlay styles*/
-#backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 800;
-    display: none;
-}
-
-.modal form {
+.modal form{
     display: flex;
     flex-direction: column;
-    background-color: #050d0d;
     justify-content: center;
     text-align: left;
     margin: auto;
@@ -751,7 +779,7 @@ label {
 #cancel-update-btn:hover {
     transform: scale(0.95);
     box-shadow: 0px 0px 12px red;
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
 }
 
@@ -770,8 +798,89 @@ label {
 #saveChanges:hover {
     transform: scale(0.95);
     box-shadow: 0px 0px 12px var(one);
-    text-shadow: 1px 1px 8px var(--white);
+    text-shadow: 1px 1px 8px white;
     cursor: pointer;
+}
+
+/* 6. Overlay styles*/
+#backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: none;
+}
+
+/* 7. Theme toggle */
+#switch-label {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+#theme-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* The switch (the box around the slider) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 1rem;
+  }
+
+  /* The slider */
+  .switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--three);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+
+  .switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: var(--one);
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px var(--one);
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  #theme-toggle{
+    height: auto;
+    width: auto;
 }
 
 

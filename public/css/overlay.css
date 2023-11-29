@@ -2,17 +2,16 @@
 /* 2. Overlay styles*/
 
 /* 1. Modal styles */
-
 .modal {
     position: fixed;
     top: 20%;
     left: 3%;
     width: 85%;
-    background: linear-gradient(43deg, #030303, #575757);
+    background: var(--darkani);
     padding: 1rem;
     border-radius: 40px;
     box-shadow: 0 0px 28px rgba(201, 201, 201, 0.227);
-    border: 2px solid rgb(30, 30, 30);
+    /* border: 2px solid rgb(30, 30, 30); */
     z-index: 900;
     display: none;
 }
@@ -62,7 +61,7 @@ aside img {
 }
 
 #modal-email-phone li a:hover {
-    color: rgb(43, 216, 144);
+    color: rgb(0, 114, 67);
 }
 
 #close-modal-container {

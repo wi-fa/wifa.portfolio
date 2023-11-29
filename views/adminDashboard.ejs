@@ -11,6 +11,7 @@
 
         <!-- JavaScript -->
         <script src="/scripts/dashBoard.js" defer></script>
+        <script src="/scripts/app.js" defer></script>
         <script src="/scripts/charts.js" defer></script>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
@@ -34,8 +35,12 @@
                 </section>
                 <section class="dashboard-content">
                     <div id="dashboard-header">
-                        <h2>Hello, &#128075<br />William</h2>
+                        <div id="dashboard-header-info">
+                            <h2>Hello, &#128075 <br/>William</h2>
+                            <h5 id="date-time">Hey</h5>
+                        </div>
                         <h4 id="dashboard-h4-default">Dashboard</h4>
+
                     </div>
                     <div class="content-container">
                         <div id="content-options">
@@ -83,9 +88,19 @@
                             </div>
                         </div>
                     </div>
+                    <div id="switch-label">
+                        <p id="theme-p">Theme</p>
+                        </div>
+                    <div id="theme-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider round"></span>
+                          </label>
+                    </div>
                 </section>
         </div>
         <!-- End of main section -->
+
     </body>
 </html>
 

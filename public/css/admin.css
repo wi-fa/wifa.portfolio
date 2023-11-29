@@ -2,15 +2,43 @@
 /* 1. Root */
 /* 2. Navigation */
 /* 3.Login form */
+
+/* 1. Root  */
 * {
-    -webkit-transiation: all 0.35s ease;
-    -moz-transiation: all 0.35s ease;
-    -o-transition: all 0.35s ease;
-    transition: all 0.35s ease;
+    -webkit-transiation: all 0.10s ease;
+    -moz-transiation: all 0.10s ease;
+    -o-transition: all 0.10s ease;
+    transition: all 0.10s ease;
+}
+
+/* Dark theme variables (default) */
+:root {
+    --backg: black;
+    --white: white;
+    --black: black;
+    --darkani: linear-gradient(43deg, #030303, #303030);
+    --one: rgb(43, 216, 144);
+    --two: rgb(29, 130, 87);
+    --three: rgb(30, 30, 30);
+    --four: rgb(197, 197, 197);
+    --five: rgb(134, 240, 196);
+}
+
+/* Light theme variables */
+[data-theme="light"] {
+    --backg: rgb(213, 233, 195);
+    --white: black; /* Adjust according to your light theme */
+    --black: white;
+    --darkani: linear-gradient(43deg, rgb(138, 239, 197), rgb(138, 239, 197));
+    --one: rgb(43, 216, 144); /* Example colors */
+    --two: rgb(100, 160, 60);
+    --three: rgb(245, 245, 245);
+    --four: rgb(50, 50, 50);
+    --five: rgb(100, 180, 100);
+    /* ... other light theme variables ... */
 }
 
 /* 2. Navigation */
-
 navbar{
     display: flex;
     flex-direction: column;
@@ -32,14 +60,13 @@ h1 {
 }
 
 /* 3.Login form */
-
 #login-container{
     width: 30vw;
     margin: 2rem auto;
     padding: 2rem;
     border-radius: 40px;
-    border: 1px solid rgb(41, 41, 41);
-    background: linear-gradient(43deg, #030303, #303030);
+    border: 1px solid var(--three);
+    background: var(--darkani);
     margin-bottom: 1rem;
 }
 
@@ -56,7 +83,7 @@ input {
     height: 3rem;
     outline: none;
     color: var(--white);
-    background-color: rgb(32, 32, 32);
+    background-color: var(--three);
     border: none;
     border-radius: 20px;
     padding: 0;
@@ -77,8 +104,17 @@ input:active {
 form button {
     width: 100%;
 }
-/* Login form mediaquerys */
 
+#theme-toggle{
+    height: auto;
+}
+
+#theme-switch {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Login form mediaquerys */
 @media screen and (max-width: 840px) {
     #admin-navbar-btn {
         display: none;

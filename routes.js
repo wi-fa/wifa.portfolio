@@ -15,7 +15,13 @@ function ensureAuthenticated(req, res, next) {
 }
 
 // Function to count my visitors for each time entering the app.
-async function recordPageVisit(pageName) {
+async function recordPageVisit(pageName, req) {
+    // Check if the request is from AWSs ELB Health Checker
+    const userAgent = req.headers['user-agent'];
+    if (userAgent && userAgent.includes("ELB-HealthChecker")) {
+        // Skip counting this visit
+        return;
+    }
     // First we create a new date object that will hold the date and time
     const today = new Date()
     // Resets the time of this date to 00:00 to make the tracking easiera
@@ -140,7 +146,7 @@ router.get('/', async (req, res) => {
 // GET Route for homepage/index
 router.get('/home', async (req, res) => {
     // Calling the tracking function and passing index as pageName
-    await recordPageVisit('index')
+    await recordPageVisit('index', req)
     // Render index.ejs
     res.render('index')
 })
@@ -148,7 +154,7 @@ router.get('/home', async (req, res) => {
 // Same as above but with onother route
 router.get('/', async (req, res) => {
     // Calling the tracking function and passing index as pageName
-    await recordPageVisit('index')
+    await recordPageVisit('index', req)
     // Render index.ejs
     res.render('index')
 })
@@ -156,7 +162,7 @@ router.get('/', async (req, res) => {
 // GET Route for my about page
 router.get('/about', async (req, res) => {
     // Calling the tracking function and passing about as pageName
-    await recordPageVisit('about')
+    await recordPageVisit('about', req)
     // Render about.ejs
     res.render('about')
 })
@@ -164,7 +170,7 @@ router.get('/about', async (req, res) => {
 // GET Route for the contact page
 router.get('/contact', async (req, res) => {
     // Calling the tracking function and passing contact as pageName
-    await recordPageVisit('contact')
+    await recordPageVisit('contact', req)
     // Render contact.ejs
     res.render('contact')
 })
@@ -209,7 +215,7 @@ router.post('/contact', async (req, res) => {
 // GET route for portfolio page
 router.get('/portfolio', async (req, res) => {
     // Calling the tracking function and passing portfolio as pageName
-    await recordPageVisit('portfolio')
+    await recordPageVisit('portfolio', req)
     try {
         // Fetch all docs for the portfolio collection in db
         const portfolioItems = await Portfolio.find({})
@@ -231,7 +237,7 @@ router.get('/portfolio', async (req, res) => {
 // GET route for thank you page
 router.get('/thanks', async (req, res) => {
     // Calling the tracking function and passing thanks as pageName
-    await recordPageVisit('thanks')
+    await recordPageVisit('thanks', req)
     // Render thanks.ejs
     res.render('thanks')
 })

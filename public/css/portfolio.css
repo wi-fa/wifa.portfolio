@@ -1,4 +1,7 @@
 @import '/css/shared.css';
+/* 1. Slider */
+/* 2. Pagination dots */
+/* 3. MediaQuerys */
 
 /* Slider container styles */
 .slider-container {
@@ -64,6 +67,7 @@
     margin-left: 0.5rem;
 }
 
+/* 2. Pagination dots */
 .slider-dots {
     display: flex;
     justify-content: center;
@@ -83,6 +87,7 @@
     background-color: var(--two);
 }
 
+/* 3. Mediaquerys */
 @media screen and (max-width: 840px) {
     .slide {
         display: block !important;
@@ -101,10 +106,6 @@
     }
 
     #portfolio-p-2 {
-        margin-left: 3rem;
-    }
-
-    .portfolio-link {
         margin-left: 3rem;
     }
 

@@ -1,16 +1,61 @@
-/* Admin-Messages styling */
+/* 1. Root */
+/* 2. Message-cards  */
+/* 3. Mediaquerys */
+
+/* Dark theme variables (default) */
+:root {
+    --backg: black;
+    --white: white;
+    --black: black;
+    --darkani: linear-gradient(43deg, #030303, #303030);
+    --input: rgb(52, 52, 52);
+    --inputactive: rgb(43, 216, 144);
+    --sidemenu: #050d0d;
+    --svg: rgb(43, 216, 144);
+    --dashcards: linear-gradient(43deg, #050d0d, #050d0d);
+    --one: rgb(43, 216, 144);
+    --two: rgb(29, 130, 87);
+    --three: rgb(30, 30, 30);
+    --four: rgb(197, 197, 197);
+    --five: rgb(134, 240, 196);
+}
+
+/* Light theme variables */
+[data-theme="light"] {
+    --backg: rgb(213, 233, 195);
+    --white: black;
+    --black: white;
+    --darkani: linear-gradient(43deg, #f2f2f2, #3ace7f);
+    --input: rgb(186, 226, 201);
+    --inputactive: rgb(138, 239, 197);
+    --sidemenu: rgb(43, 216, 144);
+    --svg: black;
+    --dashcards: linear-gradient(43deg, rgb(138, 239, 197), rgb(138, 239, 197));
+    --one: rgb(43, 216, 144);
+    --two: rgb(138, 239, 197);
+    --three: rgb(245, 245, 245);
+    --four: rgb(50, 50, 50);
+    --five: rgb(100, 180, 100);
+}
+
+* {
+    -webkit-transiation: all 0.10s ease;
+    -moz-transiation: all 0.10s ease;
+    -o-transition: all 0.10s ease;
+    transition: all 0.10s ease;
+}
+
+/* 2. Messages cards */
 #messages {
     width: 100%;
 }
 
 .message-card {
-
-    background-color: #1a1a1a;
-    color: white;
+    background: var(--dashcards);
+    color: var(--white);
     margin-bottom: 1rem;
     padding: 1rem;
     border-radius: 20px;
-    transition: all 0.2s ease;
 }
 
 .message-card:hover {
@@ -37,7 +82,7 @@
 }
 
 .message-details.expanded {
-    max-height: 200px; /* Adjust as needed */
+    max-height: 200px;
     opacity: 1;
 }
 
@@ -47,7 +92,7 @@
 }
 
 .pagination a {
-    color: white;
+    color: var(--white);
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color 0.2s;
@@ -55,16 +100,15 @@
 }
 
 .pagination a.active {
-    color: #2bd890;
+    color: var(--one);
 }
 
 .pagination a:hover:not(.active) {
-    color: #ddd;
+    color: var(--white);
 }
 
 
-/* Admin message mediaquerys */
-
+/* 3. Mediaquerys */
 @media screen and (max-width: 768px) {
     body {
         max-width: 100%;
