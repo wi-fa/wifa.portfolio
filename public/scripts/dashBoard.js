@@ -35,17 +35,17 @@ menuLinks.forEach(function (link) {
 // Function to show the date in the dashboard
 function updateDateTime() {
     const activePage = extractActivePage()
-    if(activePage !== 'admin'){
+    if (activePage !== 'admin') {
         const now = new Date()
 
-    // Format the date as 'dd/mm/yyyy'
-    const day = String(now.getDate()).padStart(2, '0')
-    const month = String(now.getMonth() + 1).padStart(2, '0') // Month is 0-indexed
-    const year = String(now.getFullYear()).slice(-2)
-    const formattedDate = `${day}/${month}/${year}`
+        // Format the date as 'dd/mm/yyyy'
+        const day = String(now.getDate()).padStart(2, '0')
+        const month = String(now.getMonth() + 1).padStart(2, '0') // Month is 0-indexed
+        const year = String(now.getFullYear()).slice(-2)
+        const formattedDate = `${day}/${month}/${year}`
 
-    // Combine date and time with a line break
-    document.getElementById('date-time').innerHTML = formattedDate
+        // Combine date and time with a line break
+        document.getElementById('date-time').innerHTML = formattedDate
     }
 }
 // Initialize the date and time
@@ -132,14 +132,16 @@ document.querySelectorAll('.delete-btn').forEach((button) => {
         const itemId = this.getAttribute('data-id')
 
         // Adding a confirmation box so no item accidentally is deleted
-        if (confirm('Are you really sure that you want to delete this item? ')) {
+        if (
+            confirm('Are you really sure that you want to delete this item? ')
+        ) {
             axios
                 // Deleting the item with axios
                 .delete(`/admin-dashboard/portfolio/delete-item/${itemId}`)
                 .then((response) => {
                     // Debugging code
                     console.log(response)
-                     // Removing the card from the DOM
+                    // Removing the card from the DOM
                     this.closest('.portfolio-cards').remove()
                 })
                 // If error we catch it, log the error and showing an alert
@@ -154,13 +156,13 @@ document.querySelectorAll('.delete-btn').forEach((button) => {
 // Closing the editmodal if the backdrop is clicked
 function closeModal() {
     const activePage = extractActivePage()
-    if(activePage === 'admin-dashboard/portfolio'){
+    if (activePage === 'admin-dashboard/portfolio') {
         // Selecting the backdrop element from the DOM
-    const backdropElement = document.getElementById('backdrop')
-    // Closing the modal(changing href) when clicking on the backdrop
-    backdropElement.addEventListener('click', function () {
-        window.location.href = '/admin-dashboard/portfolio'
-    })
+        const backdropElement = document.getElementById('backdrop')
+        // Closing the modal(changing href) when clicking on the backdrop
+        backdropElement.addEventListener('click', function () {
+            window.location.href = '/admin-dashboard/portfolio'
+        })
     }
 }
 // Calling the function
@@ -229,3 +231,5 @@ function theseDamnBtns() {
     }
 }
 theseDamnBtns()
+
+/* All JavaScript is validated with Esprima JS validator */

@@ -1,6 +1,14 @@
 Hej!
-Här har du min uppgift! Tror dock inte att du kommer se så mycket eftersom min databas ligger localt. Har inte publicerat den ännu men planerar att göra det med mongodb atlas och sedan publicera med vercel.
+Här är min JavaScript Lab 2.
+Jag var tvungen att byta till node v.18.18.2 med hjälp av nvm för att kunna deploya den hos AWS.
+Kör npm install så ska du ha tillgång till allt. Alternativt använd appen här:
+http://wifa.eu-north-1.elasticbeanstalk.com/
+Du hittar username och password i filen user.json ifall du vill logga in på dashboarden.
 
-Fråga gärna om det är något du undrar i koden.
+Det var en utmnaing att få till all backend. Det blev många timmar med docs och även lite chatgpt. Jag har lite erfarenhet av Node, express, mysql och mongodb sedan innan då jag tagit en kurs på udemy.
+
+Detta var en extremt rolig uppgift och jag längtar tills vi ska dra igång med ramverk och fullstack senare!!
+
+Om någonting är otydligt eller om du har några frågor så får du gärna fråga!
 
 Hälsningar, William Falk

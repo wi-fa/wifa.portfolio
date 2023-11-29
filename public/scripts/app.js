@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Theme initialization
     // Getting the theme from localstorage or setting default to dark
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
+    const currentTheme = localStorage.getItem('theme') || 'dark'
+    document.documentElement.setAttribute('data-theme', currentTheme)
     // Getting access to the toggleswitch from the DOM
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle = document.getElementById('theme-toggle')
     // Setting the toggle depending on the current theme
     themeToggle.checked = currentTheme === 'dark'
 
@@ -111,37 +111,41 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
     })
-});
+})
 
 // 4. More theme code.
 // Adding an eventlistener for the theme toggle
-document.getElementById('theme-toggle').addEventListener('change', function(e) {
-    let theme;
-    // Check if the theme toggle is checked
-    if (e.target.checked) {
-        // Set theme to dark if the toggle is checked
-        theme = 'dark';
-    } else {
-        // Set theme to light if the toggle is not checked
-        theme = 'light';
-    }
+document
+    .getElementById('theme-toggle')
+    .addEventListener('change', function (e) {
+        let theme
+        // Check if the theme toggle is checked
+        if (e.target.checked) {
+            // Set theme to dark if the toggle is checked
+            theme = 'dark'
+        } else {
+            // Set theme to light if the toggle is not checked
+            theme = 'light'
+        }
 
-    // Set the theme attribute to the whole app (root element)
-    document.documentElement.setAttribute('data-theme', theme);
-    // Store the selected theme in local storage
-    localStorage.setItem('theme', theme);
-    // Update the theme-related text
-    updateThemeParagraphText(theme);
-});
+        // Set the theme attribute to the whole app (root element)
+        document.documentElement.setAttribute('data-theme', theme)
+        // Store the selected theme in local storage
+        localStorage.setItem('theme', theme)
+        // Update the theme-related text
+        updateThemeParagraphText(theme)
+    })
 
 // Updating the label for the switch
 function updateThemeParagraphText(theme) {
-    const themeParagraph = document.getElementById('theme-p');
-    if(theme === 'dark') {
+    const themeParagraph = document.getElementById('theme-p')
+    if (theme === 'dark') {
         // Text for dark theme
-        themeParagraph.textContent = 'Noctem';
+        themeParagraph.textContent = 'Noctem'
     } else {
         // Text for light theme
-        themeParagraph.textContent = 'Diem';
+        themeParagraph.textContent = 'Diem'
     }
 }
+
+/* All JavaScript is validated with Esprima JS validator */

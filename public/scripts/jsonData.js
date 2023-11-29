@@ -1,16 +1,16 @@
 // Adding a global variable to store the data
-let pageData;
+let pageData
 
 // Get the active page from the url
 function extractActivePage() {
     // First we take the current path from window location
-    const url = window.location.pathname;
+    const url = window.location.pathname
 
     // Extract the page name or default to 'home' if it's the root path
-    const activePage = url.replace('/', '') || 'home';
+    const activePage = url.replace('/', '') || 'home'
 
     // Return the active page
-    return activePage;
+    return activePage
 }
 
 // Function to fetch page data from the mongodb collections
@@ -18,48 +18,49 @@ function fetchPagesData() {
     // Check the active pages name
     const activePage = extractActivePage()
     //Then using axios to make a get request
-    axios.get('/fetch-data')
+    axios
+        .get('/fetch-data')
         .then((response) => {
             // Then storing the response data in my global variable
-            pageData = response.data;
+            pageData = response.data
 
             // Calling functions to fill my html elements
-            storeDataLocal(pageData);
-            populateNavbar(pageData);
-            updateHeroSection(pageData, extractActivePage());
+            storeDataLocal(pageData)
+            populateNavbar(pageData)
+            updateHeroSection(pageData, extractActivePage())
 
             // Adding specific content depending on the active page
             if (activePage === 'about') {
-                populateAboutSection(pageData);
+                populateAboutSection(pageData)
             }
             if (activePage === 'contact') {
-                populateContactSection(pageData);
+                populateContactSection(pageData)
             }
             if (activePage === 'home') {
-                populateCards(pageData);
+                populateCards(pageData)
             }
 
             // After everything is fetched and populated + 2 sec, im hiding the preloader
-            setTimeout(hidePreloader, 2000);
+            setTimeout(hidePreloader, 2000)
 
             // Returning the fetched data
-            return pageData;
+            return pageData
         })
         .catch((error) => {
             // Log errors to the console
-            console.error('Error fetching: ', error);
-            setTimeout(hidePreloader, 2000);
-        });
+            console.error('Error fetching: ', error)
+            setTimeout(hidePreloader, 2000)
+        })
 }
 
 // Function to store data in the local storage
 function storeDataLocal(data) {
     try {
         // Here i convert the data to a JSON string and store in localstorage
-        localStorage.setItem(`pageData_all`, JSON.stringify(data));
+        localStorage.setItem(`pageData_all`, JSON.stringify(data))
     } catch (error) {
         // Logging errors to the console
-        console.error('Error storing data in localStorage: ', error);
+        console.error('Error storing data in localStorage: ', error)
     }
 }
 
@@ -67,87 +68,87 @@ function storeDataLocal(data) {
 function getDataFromLocal() {
     try {
         // Get the data from local storage
-        const storedData = localStorage.getItem(`pageData_all`);
+        const storedData = localStorage.getItem(`pageData_all`)
         // If data exist we parse it then return it, else we return null
-        return storedData ? JSON.parse(storedData) : null;
+        return storedData ? JSON.parse(storedData) : null
     } catch (error) {
         // Log errors to the console and return null
-        console.error('Error collecting data from localStorage: ', error);
-        return null;
+        console.error('Error collecting data from localStorage: ', error)
+        return null
     }
 }
 
 // Function to fill the navbar
 function populateNavbar(pagesData) {
     // Order of navigation items
-    const order = ['home', 'about', 'contact', 'portfolio'];
+    const order = ['home', 'about', 'contact', 'portfolio']
 
     // Collection pages thats shouldnt be in the navbar
-    const excludePages = ['thanks', 'error', '404'];
+    const excludePages = ['thanks', 'error', '404']
 
     // Selecting the navigation element
-    const navList = document.querySelector('.navigation');
+    const navList = document.querySelector('.navigation')
 
     // Create a map of pages for quicker access
-    const pageMap = {};
+    const pageMap = {}
     pagesData.forEach((page) => {
-        pageMap[page.link.url] = page;
-    });
+        pageMap[page.link.url] = page
+    })
 
-     // Looping the order array creating the navbar with the items that i want and not the ones i dont want
+    // Looping the order array creating the navbar with the items that i want and not the ones i dont want
 
-     // I had to do this since the order of item in my db changed when dumped from the local db to atlas.
-     order.forEach((pageName) => {
-        const page = pageMap[pageName];
+    // I had to do this since the order of item in my db changed when dumped from the local db to atlas.
+    order.forEach((pageName) => {
+        const page = pageMap[pageName]
         if (page && !excludePages.includes(pageName)) {
             // Creating the elements for the pages that i want
-            const li = document.createElement('li');
-            const a = document.createElement('a');
+            const li = document.createElement('li')
+            const a = document.createElement('a')
 
             // Setting the href and text to the elements
-            a.href = page.link.url;
-            a.textContent = page.link.text;
+            a.href = page.link.url
+            a.textContent = page.link.text
 
             // Appending them to the DOM
-            li.appendChild(a);
-            navList.appendChild(li);
+            li.appendChild(a)
+            navList.appendChild(li)
         }
-    });
+    })
 }
 
 // Function to update the hero section of the active page
 function updateHeroSection(data, activePage) {
     //Debugging code for the hero
-    console.log('Updating hero section for page:', activePage);
+    console.log('Updating hero section for page:', activePage)
 
     // Selecting the hero elements
-    const heroTitle = document.getElementById('hero-title');
-    const heroParagraph = document.getElementById('hero-paragraph');
+    const heroTitle = document.getElementById('hero-title')
+    const heroParagraph = document.getElementById('hero-paragraph')
 
     // Then finding the data for the active page
-    let activePageData = data.find((page) => page.link.url === activePage);
+    let activePageData = data.find((page) => page.link.url === activePage)
 
     // If the data for the active page is found we update the hero section
     if (activePageData) {
         // Creating the element for the pageSymbol in the header
-        const pageSymbol = activePageData.pageSymbol;
-        const titleContent = document.createElement('span');
-        titleContent.textContent = activePageData.header;
+        const pageSymbol = activePageData.pageSymbol
+        const titleContent = document.createElement('span')
+        titleContent.textContent = activePageData.header
 
         // Setting the right style for the pageSymbol
-        const brandColorSpan = document.createElement('span');
-        brandColorSpan.className = 'brand-color';
-        brandColorSpan.textContent = pageSymbol;
+        const brandColorSpan = document.createElement('span')
+        brandColorSpan.className = 'brand-color'
+        brandColorSpan.textContent = pageSymbol
 
         // Appending the element to the DOM
-        titleContent.appendChild(brandColorSpan);
+        titleContent.appendChild(brandColorSpan)
 
         // Setting the hero and appending it to the DOM
-        heroTitle.innerHTML = '';
-        heroTitle.appendChild(titleContent);
+        heroTitle.innerHTML = ''
+        heroTitle.appendChild(titleContent)
 
         // Changing the text in header
-        heroParagraph.textContent = activePageData.headerParagraph;
+        heroParagraph.textContent = activePageData.headerParagraph
     }
 }
 
@@ -155,29 +156,29 @@ function updateHeroSection(data, activePage) {
 function populateCards(data) {
     // Access cards data from the first page content
     // since its only on the homepage
-    let cardsData = data[0].pageContent[0].content;
+    let cardsData = data[0].pageContent[0].content
 
     // Extracting keys of the data
-    const cardKeys = Object.keys(cardsData);
-    console.log(cardKeys);
+    const cardKeys = Object.keys(cardsData)
+    console.log(cardKeys)
 
     // Looping through each card key and updating the card elements
     cardKeys.forEach((key, index) => {
-        const card = cardsData[key];
+        const card = cardsData[key]
         // So index 0 becomes 1
-        const cardIndex = index + 1;
+        const cardIndex = index + 1
 
         // Selecting the cards h2's
-        let cardTitles = document.getElementById(`card-${cardIndex}-h2`);
+        let cardTitles = document.getElementById(`card-${cardIndex}-h2`)
 
         // Selecting the cards paragraphs
-        let cardParagraphs = document.getElementById(`card-${cardIndex}-p`);
+        let cardParagraphs = document.getElementById(`card-${cardIndex}-p`)
 
         // Setting the right textcontent from db
-        if (cardTitles) cardTitles.textContent = card.cardTitle;
+        if (cardTitles) cardTitles.textContent = card.cardTitle
         // Making the paragraphs uppercase
-        if (cardParagraphs) cardParagraphs.textContent = card.
-        cardParagraph.toUpperCase()
+        if (cardParagraphs)
+            cardParagraphs.textContent = card.cardParagraph.toUpperCase()
 
         // Skill card has a diffrent strucutre so i
         // had to handle this card diffrent
@@ -185,26 +186,26 @@ function populateCards(data) {
         if (key === 'skills') {
             for (let i = 1; i <= 4; i++) {
                 // Selecting the imgs/icons in the skill-card
-                const imgElement = document.getElementById(`skill-img${i}`);
+                const imgElement = document.getElementById(`skill-img${i}`)
                 if (imgElement) {
                     // Setting the right src and alt
-                    imgElement.src = card[`cardIcon${i}`];
-                    imgElement.alt = card[`cardIconAlt${i}`];
+                    imgElement.src = card[`cardIcon${i}`]
+                    imgElement.alt = card[`cardIconAlt${i}`]
                 }
             }
         } else {
             // Handling the images for the home, contact, and portfolio cards
-            const cardImg = document.getElementById(`card-${cardIndex}-img`);
+            const cardImg = document.getElementById(`card-${cardIndex}-img`)
             if (cardImg) {
-                cardImg.src = card.cardImg;
-                cardImg.alt = card.cardImgAlt; // Assuming you have alt text for images
+                cardImg.src = card.cardImg
+                cardImg.alt = card.cardImgAlt // Assuming you have alt text for images
             }
         }
 
         // Updating the link for each card
-        const cardLink = document.querySelector(`#card-${cardIndex} a`);
-        if (cardLink) cardLink.href = card.cardHrf;
-    });
+        const cardLink = document.querySelector(`#card-${cardIndex} a`)
+        if (cardLink) cardLink.href = card.cardHrf
+    })
 }
 
 // Function to fill the about section
@@ -245,10 +246,9 @@ function populateAboutSection(data) {
     }
     // Debugging code for the memoji
     if (!aboutPhoto) {
-    console.error("aboutPhoto element not found!");
-    return;
+        console.error('aboutPhoto element not found!')
+        return
     }
-
 }
 
 // Function to fill the contact section
@@ -282,7 +282,9 @@ function populateContactSection(data) {
 
     // Selecting the text above/aside the form and updating the text
     const contactTextHeader = document.getElementById('contact-text-header')
-    const contactTextParagraph = document.getElementById('contact-text-paragraph')
+    const contactTextParagraph = document.getElementById(
+        'contact-text-paragraph'
+    )
     contactTextHeader.textContent = contactData.contactHeader
     contactTextParagraph.textContent = contactData.contactParagraph
 }
@@ -318,29 +320,31 @@ function handleSubmit(event) {
 // Event listener for DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', () => {
     // Extract active page and check local storage for data
-    const activePage = extractActivePage();
-    let storedData = getDataFromLocal();
+    const activePage = extractActivePage()
+    let storedData = getDataFromLocal()
 
-    console.log('Stored data:', storedData);
+    console.log('Stored data:', storedData)
 
     // Populate the page with stored data or fetch new data
     if (storedData) {
-        console.log('from storage');
-        populateNavbar(storedData);
-        updateHeroSection(storedData, activePage);
+        console.log('from storage')
+        populateNavbar(storedData)
+        updateHeroSection(storedData, activePage)
     } else {
-        console.log('from fetch..');
-        fetchPagesData();
+        console.log('from fetch..')
+        fetchPagesData()
     }
 
     // Populate specific sections based on the active page
     if (activePage === 'home') {
-        populateCards(storedData);
+        populateCards(storedData)
     }
     if (activePage === 'about') {
-        populateAboutSection(storedData);
+        populateAboutSection(storedData)
     }
     if (activePage === 'contact') {
-        populateContactSection(storedData);
+        populateContactSection(storedData)
     }
-});
+})
+
+/* All JavaScript is validated with Esprima JS validator */

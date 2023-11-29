@@ -4,39 +4,41 @@ let myChart
 // Setting the theme colors for the charts to match the root elements theme
 const themeColors = {
     light: {
-        textColor: 'black',
+        textColor: 'black'
     },
     dark: {
-        textColor: 'white',
+        textColor: 'white'
     }
 }
 
 // Function to update the chart text and doughnut border colors depending on the theme
 function updateChartColors(theme) {
-    const currentThemeColors = themeColors[theme];
+    const currentThemeColors = themeColors[theme]
     // Line charts changes
     if (myChart) {
-        myChart.options.scales.y.ticks.color = currentThemeColors.textColor;
-        myChart.options.scales.x.ticks.color = currentThemeColors.textColor;
-        myChart.options.plugins.legend.labels.color = currentThemeColors.textColor;
-        myChart.options.plugins.title.color = currentThemeColors.textColor;
-        myChart.update();
+        myChart.options.scales.y.ticks.color = currentThemeColors.textColor
+        myChart.options.scales.x.ticks.color = currentThemeColors.textColor
+        myChart.options.plugins.legend.labels.color =
+            currentThemeColors.textColor
+        myChart.options.plugins.title.color = currentThemeColors.textColor
+        myChart.update()
     }
-    const doughnutChart = Chart.getChart('myDonutChart');
+    const doughnutChart = Chart.getChart('myDonutChart')
     // Donut changes
     if (doughnutChart) {
-        doughnutChart.options.plugins.legend.labels.color = currentThemeColors.textColor;
-        doughnutChart.options.plugins.title.color = currentThemeColors.textColor;
-        doughnutChart.update();
+        doughnutChart.options.plugins.legend.labels.color =
+            currentThemeColors.textColor
+        doughnutChart.options.plugins.title.color = currentThemeColors.textColor
+        doughnutChart.update()
     }
 }
 
 // Function to initialize chart colors based on the current theme
 function initChartColors() {
     // Getting the theme from local or setting it to dark
-    const currentTheme = localStorage.getItem('theme') || 'dark';
+    const currentTheme = localStorage.getItem('theme') || 'dark'
     // Updating the colors depending on what theme is in localstorage
-    updateChartColors(currentTheme);
+    updateChartColors(currentTheme)
 }
 
 // Asynchronous function to fetch data from an API endpoint
@@ -267,42 +269,44 @@ async function renderPageVisitDonutChart() {
 // DOMContentLoaded event listener to initialize charts and buttons
 document.addEventListener('DOMContentLoaded', async () => {
     // Update the line chart
-    await updateChart(daysMode);
+    await updateChart(daysMode)
     // Render the doughnut chart
-    await renderPageVisitDonutChart();
+    await renderPageVisitDonutChart()
     // Setting chart color depending on the theme
-    initChartColors();
+    initChartColors()
     // Setting chart toggle button styles to show the active chart
-    updateButtonStyles();
+    updateButtonStyles()
     // Moving the button with javascript since chart.js is stupid and streching down until the page crashes
-    repositionButtons();
-});
+    repositionButtons()
+})
 
 // Theme toggle event listener
-document.getElementById('theme-toggle').addEventListener('change', async function(e) {
-    let theme;
-    // Check if the toggle switch is in the 'checked' state
-    if (e.target.checked) {
-        // Set theme to dark if the toggle is checked
-        theme = 'dark';
-    } else {
-        // Set theme to light if the toggle is not checked
-        theme = 'light';
-    }
+document
+    .getElementById('theme-toggle')
+    .addEventListener('change', async function (e) {
+        let theme
+        // Check if the toggle switch is in the 'checked' state
+        if (e.target.checked) {
+            // Set theme to dark if the toggle is checked
+            theme = 'dark'
+        } else {
+            // Set theme to light if the toggle is not checked
+            theme = 'light'
+        }
 
-    // Apply the selected theme to the root element and then store it in local storage
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+        // Apply the selected theme to the root element and then store it in local storage
+        document.documentElement.setAttribute('data-theme', theme)
+        localStorage.setItem('theme', theme)
 
-    // Setting chart color depending on the theme
-    initChartColors();
-    // Update the line chart
-    await updateChart(daysMode);
-    // Render the doughnut chart
-    await renderPageVisitDonutChart();
-    // Setting chart toggle button styles to show the active chart
-    updateButtonStyles();
-});
+        // Setting chart color depending on the theme
+        initChartColors()
+        // Update the line chart
+        await updateChart(daysMode)
+        // Render the doughnut chart
+        await renderPageVisitDonutChart()
+        // Setting chart toggle button styles to show the active chart
+        updateButtonStyles()
+    })
 
 // Function to update the tooltip based on the display mode
 function updateTooltipForDisplayMode() {
@@ -434,5 +438,7 @@ function repositionButtons() {
 window.addEventListener('resize', repositionButtons)
 
 // Variables for display mode and days mode
-let displayMode = 'percent';
-let daysMode = 7;
+let displayMode = 'percent'
+let daysMode = 7
+
+/* All JavaScript is validated with Esprima JS validator */
