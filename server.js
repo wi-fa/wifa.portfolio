@@ -49,15 +49,15 @@ app.use((req, res, next) => {
 })
 
 // Limit requests (since my pageVisits was spammed after deploy)
-// const limiter = rateLimit({
-//     // 15 minutes
-//     windowMs: 15 * 60 * 1000,
-//     // limit each IP to 50 requests per windowMs
-//     max: 50 //
-// })
+const limiter = rateLimit({
+    // 15 minutes
+    windowMs: 15 * 60 * 1000,
+    // limit each IP to 50 requests per windowMs
+    max: 50 //
+})
 
-//  apply to all requests
-// app.use(limiter)
+// apply to all requests
+app.use(limiter)
 
 // Configure express-session
 app.use(
