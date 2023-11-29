@@ -97,7 +97,7 @@ function populateNavbar(pagesData) {
 
     // Looping the order array creating the navbar with the items that i want and not the ones i dont want
 
-    // I had to do this since the order of item in my db changed when dumped from the local db to atlas.
+    // I had to do this since the order of items in my db keep changing this happend after i dumped all from local db to atlas.
     order.forEach((pageName) => {
         const page = pageMap[pageName]
         if (page && !excludePages.includes(pageName)) {
@@ -211,7 +211,7 @@ function populateCards(data) {
 // Function to fill the about section
 function populateAboutSection(data) {
     // Taking the data from the the about page in the db
-    const aboutData = data[4].pageContent[0].content
+    const aboutData = data[1].pageContent[0].content
 
     // Selecting all the elements for the about section
     const aboutHeader = document.getElementById('about-header')
@@ -254,7 +254,7 @@ function populateAboutSection(data) {
 // Function to fill the contact section
 function populateContactSection(data) {
     // Getting the data from my db
-    const contactData = data[5].pageContent[0].content
+    const contactData = data[2].pageContent[0].content
 
     // Updating the form title
     const formTitle = document.getElementById('form-title')
