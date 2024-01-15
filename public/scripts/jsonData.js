@@ -154,9 +154,16 @@ function updateHeroSection(data, activePage) {
 
 // Function to fill cards on the page
 function populateCards(data) {
-    // Access cards data from the first page content
-    // since its only on the homepage
-    let cardsData = data[0].pageContent[0].content
+    // Finding the data for the cards
+   const homePageData = data.find(page => page.link.url === 'home')
+    // Check if the data exist
+   if (!homePageData || !homePageData.pageContent || !homePageData.pageContent[0]) {
+    console.error('Could not find Homepage data')
+    return
+   }
+
+   // Access cards data from the homepage content
+   let cardsData = homePageData.pageContent[0].content
 
     // Extracting keys of the data
     const cardKeys = Object.keys(cardsData)
@@ -211,7 +218,14 @@ function populateCards(data) {
 // Function to fill the about section
 function populateAboutSection(data) {
     // Taking the data from the the about page in the db
-    const aboutData = data[1].pageContent[0].content
+    const aboutPageData = data.find(page => page.link.url === 'about')
+
+    if (!aboutPageData || !aboutPageData.pageContent || !aboutPageData.pageContent[0]) {
+        console.error('Could not find Aboutpage data')
+        return
+    }
+
+    const aboutData = aboutPageData.pageContent[0].content
 
     // Selecting all the elements for the about section
     const aboutHeader = document.getElementById('about-header')
@@ -254,7 +268,15 @@ function populateAboutSection(data) {
 // Function to fill the contact section
 function populateContactSection(data) {
     // Getting the data from my db
-    const contactData = data[2].pageContent[0].content
+    const contactPageData = data.find(page => page.link.url === 'contact')
+
+    // Check if the data exist
+    if(!contactPageData || !contactPageData.pageContent || !contactPageData.pageContent[0]) {
+        console.error('Contact page data not found')
+        return
+    }
+
+    const contactData = contactPageData.pageContent[0].content
 
     // Updating the form title
     const formTitle = document.getElementById('form-title')
