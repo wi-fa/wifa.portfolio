@@ -1,16 +1,26 @@
 // server.js
 const express = require('express')
+const app = express()
+require('dotenv').config()
+
+// Redirect HTTP to HTTPS
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === 'production') {
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    } else {
+      next();
+    }
+  });
+
 const mongoose = require('mongoose')
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
 const flash = require('connect-flash')
 const rateLimit = require('express-rate-limit')
-const app = express()
 const User = require('./models').User
 const pageVisitRoutes = require('./routes.js')
 const PORT = process.env.PORT || 3000
-require('dotenv').config()
 
 // Connect to db using Mongoose
 mongoose
